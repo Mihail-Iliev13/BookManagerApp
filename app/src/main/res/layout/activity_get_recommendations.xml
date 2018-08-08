@@ -16,6 +16,55 @@
             android:layout_width="match_parent"
             android:layout_height="40dp" />
 
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:id="@+id/cb_fantasy"
+            android:layout_below="@+id/tv_message"
+            android:text="Fantasy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="selectItem"
+            />
+
+        <CheckBox
+            android:id="@+id/cb_classics"
+            android:layout_below="@+id/cb_fantasy"
+            android:text="Classics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="selectItem"
+            />
+
+        <CheckBox
+            android:id="@+id/cb_horror"
+            android:layout_below="@+id/cb_classics"
+            android:text="Horror"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="selectItem"
+            />
+
+        <CheckBox
+            android:id="@+id/cb_biographies"
+            android:layout_below="@+id/cb_horror"
+            android:text="Biographies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="selectItem"
+            />
+
+        <Button
+            android:id="@+id/bt_get_recommendations"
+            android:layout_below="@+id/cb_biographies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get Recommendations"
+            />
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

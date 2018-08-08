@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "77842353739",
+    "firebase_url": "https://bookmanagerapprepo.firebaseio.com",
+    "project_id": "bookmanagerapprepo",
+    "storage_bucket": "bookmanagerapprepo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77842353739:android:05bdef8615a7853a",
+        "android_client_info": {
+          "package_name": "com.example.pc.bookmanagerapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77842353739-gasvnrtiksr9bslbt54gr45o220u8bf6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtjgSf6CrRshqX_z8M8MyDKFI6J_KyDVI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

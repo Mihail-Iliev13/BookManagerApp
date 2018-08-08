@@ -1,5 +1,6 @@
 package com.example.pc.bookmanagerapplication.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
@@ -18,6 +19,9 @@ public class CurrentlyReadingActivity extends BaseDrawerActivity {
 
         mToolbar = findViewById(R.id.tb_menu);
         setSupportActionBar(mToolbar);
+
+        Intent intent = getIntent();
+
     }
 
     @Override

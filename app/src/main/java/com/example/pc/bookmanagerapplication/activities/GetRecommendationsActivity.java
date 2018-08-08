@@ -20,7 +20,7 @@ public class GetRecommendationsActivity extends BaseDrawerActivity{
     List<String> mSelection;
     Toolbar mToolbar;
     Button mButton;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
