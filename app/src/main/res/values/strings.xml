@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BookManagerApplication</string>
+    <string name="recommendations">Recommendations</string>
+    <string name="want_to_read">Want to read</string>
+    <string name="read_books">Read books</string>
+    <string name="currently_reading">Currently Reading</string>
+</resources>
