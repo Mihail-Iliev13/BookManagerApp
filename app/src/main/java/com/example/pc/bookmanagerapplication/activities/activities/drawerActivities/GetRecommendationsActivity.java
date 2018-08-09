@@ -12,13 +12,14 @@ import com.example.pc.bookmanagerapplication.activities.activities.otherActiviti
 import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.base.BaseDrawerActivity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 //TODO: change the style
 
 public class GetRecommendationsActivity extends BaseDrawerActivity {
 
     public static final long ID = 4;
-    ArrayList<String> mSelection;
+    HashSet<String> mSelection;
     Toolbar mToolbar;
     Button mButton;
 
@@ -30,7 +31,7 @@ public class GetRecommendationsActivity extends BaseDrawerActivity {
         mToolbar = findViewById(R.id.tb_menu);
         setSupportActionBar(mToolbar);
 
-        mSelection = new ArrayList<>();
+        mSelection = new HashSet<>();
         mButton = (Button) findViewById(R.id.bt_get_recommendations);
 
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +63,5 @@ public class GetRecommendationsActivity extends BaseDrawerActivity {
         } else {
             mSelection.remove(mCheckBoxText);
         }
-
-
     }
 }
