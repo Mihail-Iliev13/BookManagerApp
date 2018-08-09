@@ -23,7 +23,7 @@ public class Book implements Serializable {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(title).append(" by ").append(author);
+        builder.append("\"").append(title).append("\"").append(" by ").append(author);
         return builder.toString();
     }
 }

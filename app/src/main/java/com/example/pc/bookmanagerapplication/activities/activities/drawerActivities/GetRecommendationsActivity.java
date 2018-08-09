@@ -32,15 +32,15 @@ public class GetRecommendationsActivity extends BaseDrawerActivity {
         setSupportActionBar(mToolbar);
 
         mSelection = new HashSet<>();
-        mButton = (Button) findViewById(R.id.bt_get_recommendations);
+        mButton = findViewById(R.id.btn_get_recommendations);
 
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(GetRecommendationsActivity.this, RecommendationsListActivity.class);
-                intent.putExtra("SELECTED_GENRES", mSelection);
-                startActivity(intent);
-            }
+        mButton.setOnClickListener(view -> {
+            Intent intent =
+                    new Intent(GetRecommendationsActivity.this,
+                            RecommendationsListActivity.class);
+
+            intent.putExtra("SELECTED_GENRES", mSelection);
+            startActivity(intent);
         });
     }
 

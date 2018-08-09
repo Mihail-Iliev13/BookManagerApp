@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.activities.models.Book;
-
+//TODO add image, change layout, add "want to read" button, and "read" button, add infromation fragment
 public class BookDetailsActivity extends AppCompatActivity {
 
     @Override

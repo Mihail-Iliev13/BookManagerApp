@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.activities.BookManagerApp;
+import com.example.pc.bookmanagerapplication.activities.RecommendationsListFragment;
 import com.example.pc.bookmanagerapplication.activities.StringConstants;
 import com.example.pc.bookmanagerapplication.activities.models.Book;
 import com.example.pc.bookmanagerapplication.activities.repository.base.Repository;
@@ -27,14 +28,12 @@ import java.util.HashSet;
 import java.util.List;
 
 
-
+//TODO RecommendationList to fragment
 public class RecommendationsListActivity extends AppCompatActivity {
-    ListView mRecommendations;
-    ArrayAdapter<Book> mAdatper;
-    List<String> mBookDetails;
-    HashSet<String> mSelectedOptions;
-    Repository<Book> mBookRepository;
 
+    ListView mRecommendations;
+    HashSet<String> mSelectedOptions;
+    RecommendationsListFragment mListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,33 +41,13 @@ public class RecommendationsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recommendations_list);
         Intent intent = getIntent();
         mSelectedOptions = (HashSet<String>) intent.getSerializableExtra("SELECTED_GENRES");
-        mBookRepository = BookManagerApp.getBookRepository(StringConstants.COLLECTION_RECOMMENDATIONS);
-        mAdatper = new ArrayAdapter<Book>(this, android.R.layout.simple_list_item_1);
-        generateBookDetailsListContent();
+        mListFragment = RecommendationsListFragment.newInstance();
+        mListFragment.setSelectedOptions(mSelectedOptions);
 
-        mRecommendations = findViewById(R.id.lv_recommendations);
-        mRecommendations.setOnItemClickListener((adapterView, view, i, l) -> {
-            Intent toBookDetails =
-                    new Intent(RecommendationsListActivity.this, BookDetailsActivity.class);
-
-                Book book = mAdatper.getItem(i);
-                toBookDetails.putExtra("BOOK", book);
-                startActivity(toBookDetails);
-        });
-        mRecommendations.setAdapter(mAdatper);
-    }
-
-    private void generateBookDetailsListContent() {
-
-        mBookRepository.getAll(books -> {
-
-            for (Book book : books) {
-
-                if (mSelectedOptions.contains(book.genre)) {
-                    mAdatper.add(book);
-                }
-            }
-        });
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.lv_content, mListFragment)
+                .commit();
 
     }
 }

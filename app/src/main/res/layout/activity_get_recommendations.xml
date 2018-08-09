@@ -18,11 +18,20 @@
 
         <TextView
             android:id="@+id/tv_message"
+            android:textStyle="bold"
+            android:fontFamily="serif-monospace"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/tb_menu"
+            android:padding="@dimen/material_drawer_account_header_dropdown"
+            android:textSize="25dp"
+            android:text="Choose your favourite genres of literature:"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <CheckBox
+            android:layout_marginLeft="10dp"
             android:id="@+id/cb_fantasy"
+            android:textSize="20sp"
             android:layout_below="@+id/tv_message"
             android:text="Fantasy"
             android:layout_width="match_parent"
@@ -31,7 +40,10 @@
             />
 
         <CheckBox
+            android:layout_marginLeft="10dp"
             android:id="@+id/cb_classics"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
             android:layout_below="@+id/cb_fantasy"
             android:text="Classics"
             android:layout_width="match_parent"
@@ -40,7 +52,10 @@
             />
 
         <CheckBox
+            android:layout_marginLeft="10dp"
             android:id="@+id/cb_horror"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
             android:layout_below="@+id/cb_classics"
             android:text="Horror"
             android:layout_width="match_parent"
@@ -48,9 +63,52 @@
             android:onClick="selectItem"
             />
 
+
+
         <CheckBox
-            android:id="@+id/cb_biographies"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/cb_novels"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
             android:layout_below="@+id/cb_horror"
+            android:text="Novels"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="selectItem"
+            />
+
+
+        <CheckBox
+            android:layout_marginLeft="10dp"
+            android:id="@+id/cb_mystery"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:layout_below="@+id/cb_novels"
+            android:text="Mystery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="selectItem"
+            />
+
+
+        <CheckBox
+            android:id="@+id/cb_science_fiction"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:layout_below="@+id/cb_mystery"
+            android:text="Science-Fiction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="selectItem"
+            />
+
+        <CheckBox
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/cb_biographies"
+            android:textSize="20sp"
+            android:layout_below="@+id/cb_science_fiction"
             android:text="Biographies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,7 +116,10 @@
             />
 
         <Button
-            android:id="@+id/bt_get_recommendations"
+            android:id="@+id/btn_get_recommendations"
+            android:layout_marginTop="50dp"
+            android:background="@android:color/holo_blue_light"
+            android:textSize="25sp"
             android:layout_below="@+id/cb_biographies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
