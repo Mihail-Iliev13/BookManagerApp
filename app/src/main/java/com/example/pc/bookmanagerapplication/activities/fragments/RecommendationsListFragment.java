@@ -1,8 +1,6 @@
-package com.example.pc.bookmanagerapplication.activities;
+package com.example.pc.bookmanagerapplication.activities.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,8 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.pc.bookmanagerapplication.R;
+import com.example.pc.bookmanagerapplication.activities.BookManagerApp;
+import com.example.pc.bookmanagerapplication.activities.StringConstants;
 import com.example.pc.bookmanagerapplication.activities.activities.otherActivities.BookDetailsActivity;
-import com.example.pc.bookmanagerapplication.activities.activities.otherActivities.RecommendationsListActivity;
 import com.example.pc.bookmanagerapplication.activities.models.Book;
 import com.example.pc.bookmanagerapplication.activities.repository.base.Repository;
 

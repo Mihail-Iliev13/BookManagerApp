@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.pc.bookmanagerapplication.R;
+import com.example.pc.bookmanagerapplication.activities.fragments.BookOutlookFragment;
 import com.example.pc.bookmanagerapplication.activities.models.Book;
 //TODO add image, change layout, add "want to read" button, and "read" button, add infromation fragment
 public class BookDetailsActivity extends AppCompatActivity {
+
+    BookOutlookFragment mBookOutlook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,11 +20,16 @@ public class BookDetailsActivity extends AppCompatActivity {
 
         Intent fromRecommendationList = getIntent();
         Book book = (Book)fromRecommendationList.getSerializableExtra("BOOK");
-        TextView title = findViewById(R.id.tv_title);
-        title.setText(book.title);
-        TextView author = findViewById(R.id.tv_author);
-        author.setText(book.author);
-        TextView resume = findViewById(R.id.tv_resume);
-        resume.setText(book.resume);
+        mBookOutlook = BookOutlookFragment.newInstance();
+        mBookOutlook.setBook(book);
+
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.book_outlook, mBookOutlook)
+                .commit();
+
+
+
+
     }
 }
