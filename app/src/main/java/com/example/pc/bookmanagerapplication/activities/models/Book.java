@@ -1,6 +1,8 @@
 package com.example.pc.bookmanagerapplication.activities.models;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
 
     public String title;
     public String author;
@@ -18,6 +20,10 @@ public class Book {
         this.resume = resume;
     }
 
-
-
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(title).append(" by ").append(author);
+        return builder.toString();
+    }
 }
