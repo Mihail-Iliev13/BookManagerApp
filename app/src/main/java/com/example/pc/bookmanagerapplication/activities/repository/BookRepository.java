@@ -1,41 +1,38 @@
 package com.example.pc.bookmanagerapplication.activities.repository;
 
-import android.support.annotation.NonNull;
-
-import com.example.pc.bookmanagerapplication.activities.models.Book;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.pc.bookmanagerapplication.activities.repository.base.Repository;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 import java.util.function.Consumer;
 
-public class BookRepository<T> {
+public class BookRepository<T> implements Repository<T> {
 
+    private final FirebaseFirestore mFirebaseRepo;
+    private final Class<T> mKlass;
     private final String mCollectionName;
-    private FirebaseFirestore mFirebaseFirestore;
 
-    public BookRepository(String collectionName) {
-        mFirebaseFirestore = FirebaseFirestore.getInstance();
+    public BookRepository (Class<T> klass, String collectionName) {
+        mFirebaseRepo = FirebaseFirestore.getInstance();
+        mKlass = klass;
         mCollectionName = collectionName;
     }
 
-    public void getAll (Consumer<List<Book>> action){
-        mFirebaseFirestore.collection(mCollectionName)
+    @Override
+    public void getAll(Consumer<List<T>> action) {
+
+        mFirebaseRepo.collection(mCollectionName)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        List<Book> books = task.getResult().toObjects(Book.class);
-                        action.accept(books);
-                    }
+                .addOnCompleteListener(task -> {
+                   List<T> books = task.getResult()
+                           .toObjects(mKlass);
+                   action.accept(books);
                 });
     }
 
-    public void add (Book book) {
-        mFirebaseFirestore.collection(mCollectionName)
+    @Override
+    public void add(T book) {
+        mFirebaseRepo.collection(mCollectionName)
                 .add(book);
     }
-
 }
