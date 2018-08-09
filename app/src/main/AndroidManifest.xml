@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".activities.CurrentlyReadingActivity" />
         <activity android:name=".activities.WantToReadActivity" />
-        <activity android:name=".activities.ReadBooksActivity"></activity>
+        <activity android:name=".activities.ReadBooksActivity" />
+        <activity android:name=".activities.RecommendationsListActivity"></activity>
     </application>
 
 </manifest>

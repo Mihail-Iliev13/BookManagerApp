@@ -2,6 +2,7 @@ package com.example.pc.bookmanagerapplication.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -14,10 +15,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: change the style
+
 public class GetRecommendationsActivity extends BaseDrawerActivity{
 
     public static final long ID = 4;
-    List<String> mSelection;
+    ArrayList<String> mSelection;
     Toolbar mToolbar;
     Button mButton;
 
@@ -35,8 +38,8 @@ public class GetRecommendationsActivity extends BaseDrawerActivity{
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GetRecommendationsActivity.this, CurrentlyReadingActivity.class);
-                intent.putExtra("SELECTED_GENRES", (Serializable) mSelection);
+                Intent intent = new Intent(GetRecommendationsActivity.this, RecommendationsListActivity.class);
+                intent.putExtra("SELECTED_GENRES", mSelection);
                 startActivity(intent);
             }
         });
