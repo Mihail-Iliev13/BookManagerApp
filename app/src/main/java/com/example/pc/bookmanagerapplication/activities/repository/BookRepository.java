@@ -1,15 +1,19 @@
 package com.example.pc.bookmanagerapplication.activities.repository;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import com.example.pc.bookmanagerapplication.activities.models.Book;
 import com.example.pc.bookmanagerapplication.activities.repository.base.Repository;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -27,6 +31,32 @@ public class BookRepository<T> implements Repository<T> {
 
 
    public List<Book> books = new ArrayList<>();
+
+
+    @Override
+    public boolean contains(T book) {
+
+        final boolean[] contains = {false};
+        mFirebaseRepo.collection(mCollectionName)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        contains[0] =  task.getResult().toObjects(mKlass).contains(book);
+                    }
+                });
+
+        return contains[0];
+    }
+
+    @Override
+    public void remove (Book book) {
+        
+        mFirebaseRepo.collection(mCollectionName)
+                .document(book.documentRef)
+                .delete();
+    }
+
     @Override
     public void getAll(Consumer<List<T>> action) {
 
