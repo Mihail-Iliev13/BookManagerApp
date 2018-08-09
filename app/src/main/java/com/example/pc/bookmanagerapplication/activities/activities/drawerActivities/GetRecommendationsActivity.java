@@ -1,23 +1,21 @@
-package com.example.pc.bookmanagerapplication.activities;
+package com.example.pc.bookmanagerapplication.activities.activities.drawerActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
 import com.example.pc.bookmanagerapplication.R;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.example.pc.bookmanagerapplication.activities.activities.otherActivities.RecommendationsListActivity;
+import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.base.BaseDrawerActivity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 //TODO: change the style
 
-public class GetRecommendationsActivity extends BaseDrawerActivity{
+public class GetRecommendationsActivity extends BaseDrawerActivity {
 
     public static final long ID = 4;
     ArrayList<String> mSelection;

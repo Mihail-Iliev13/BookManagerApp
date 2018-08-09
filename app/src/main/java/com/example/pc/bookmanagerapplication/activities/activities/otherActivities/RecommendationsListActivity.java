@@ -1,4 +1,4 @@
-package com.example.pc.bookmanagerapplication.activities;
+package com.example.pc.bookmanagerapplication.activities.activities.otherActivities;
 
 import android.content.Context;
 import android.content.Intent;

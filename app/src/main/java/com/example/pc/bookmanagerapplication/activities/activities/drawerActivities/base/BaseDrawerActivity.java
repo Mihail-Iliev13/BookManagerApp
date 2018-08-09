@@ -1,10 +1,14 @@
-package com.example.pc.bookmanagerapplication.activities;
+package com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.base;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.pc.bookmanagerapplication.R;
+import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.CurrentlyReadingActivity;
+import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.GetRecommendationsActivity;
+import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.ReadBooksActivity;
+import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.WantToReadActivity;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
