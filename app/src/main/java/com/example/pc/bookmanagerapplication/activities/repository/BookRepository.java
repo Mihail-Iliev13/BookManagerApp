@@ -1,19 +1,16 @@
 package com.example.pc.bookmanagerapplication.activities.repository;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.widget.Toast;
 
 import com.example.pc.bookmanagerapplication.activities.models.Book;
 import com.example.pc.bookmanagerapplication.activities.repository.base.Repository;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -51,9 +48,9 @@ public class BookRepository<T> implements Repository<T> {
 
     @Override
     public void remove (Book book) {
-        
+
         mFirebaseRepo.collection(mCollectionName)
-                .document(book.documentRef)
+                .document(book.docRef)
                 .delete();
     }
 
@@ -70,8 +67,12 @@ public class BookRepository<T> implements Repository<T> {
     }
 
     @Override
-    public void add(T book) {
-        mFirebaseRepo.collection(mCollectionName)
-                .add(book);
+    public void add(Book book) {
+        DocumentReference docRef = FirebaseFirestore
+                .getInstance()
+                .collection(mCollectionName)
+                .document(book.docRef);
+
+        docRef.set(book);
     }
 }

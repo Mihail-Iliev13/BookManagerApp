@@ -2,6 +2,7 @@ package com.example.pc.bookmanagerapplication.activities.activities.drawerActivi
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -10,17 +11,18 @@ import android.widget.CheckBox;
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.activities.activities.otherActivities.RecommendationsListActivity;
 import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.base.BaseDrawerActivity;
+import com.example.pc.bookmanagerapplication.activities.fragments.DrawerFragment;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
 //TODO: change the style
 
-public class GetRecommendationsActivity extends BaseDrawerActivity {
+public class GetRecommendationsActivity extends AppCompatActivity{
 
     public static final long ID = 4;
     HashSet<String> mSelection;
-    Toolbar mToolbar;
+    DrawerFragment mDrawer;
     Button mButton;
 
     @Override
@@ -28,8 +30,13 @@ public class GetRecommendationsActivity extends BaseDrawerActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_recommendations);
 
-        mToolbar = findViewById(R.id.tb_menu);
-        setSupportActionBar(mToolbar);
+        mDrawer = DrawerFragment.newInstance();
+        setSupportActionBar(mDrawer.getToolbar());
+
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.menu, mDrawer)
+                .commit();
 
         mSelection = new HashSet<>();
         mButton = findViewById(R.id.btn_get_recommendations);
@@ -44,15 +51,6 @@ public class GetRecommendationsActivity extends BaseDrawerActivity {
         });
     }
 
-    @Override
-    protected Toolbar getDrawerToolbar() {
-        return mToolbar;
-    }
-
-    @Override
-    public long getIdentifier() {
-        return ID;
-    }
 
     public void selectItem(View view) {
         CheckBox mCheckBox = (CheckBox) view;
@@ -63,5 +61,11 @@ public class GetRecommendationsActivity extends BaseDrawerActivity {
         } else {
             mSelection.remove(mCheckBoxText);
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mDrawer.setupDrawer();
     }
 }

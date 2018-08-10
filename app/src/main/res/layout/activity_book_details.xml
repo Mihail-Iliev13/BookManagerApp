@@ -11,10 +11,24 @@
        android:layout_height="match_parent">
 
        <FrameLayout
-           android:id="@+id/book_outlook"
+           android:id="@+id/menu"
            android:layout_width="match_parent"
            android:layout_height="wrap_content">
 
+       </FrameLayout>
+
+       <FrameLayout
+           android:id="@+id/book_outlook"
+           android:layout_below="@+id/menu"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+       </FrameLayout>
+
+       <FrameLayout
+           android:id="@+id/replacing_button"
+           android:layout_below="@+id/book_outlook"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
 
        </FrameLayout>
 

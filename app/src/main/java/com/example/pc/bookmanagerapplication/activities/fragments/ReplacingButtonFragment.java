@@ -1,5 +1,6 @@
 package com.example.pc.bookmanagerapplication.activities.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
@@ -30,6 +31,7 @@ public class ReplacingButtonFragment extends Fragment {
     }
 
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class ReplacingButtonFragment extends Fragment {
 
                 mBookRepository.add(mCurrentBook);
                 mReplacingButton.setText("Remove");
-                mReplacingButton.setBackgroundColor(Color.RED);
+                mReplacingButton.setBackgroundColor(R.color.colorAccent);
                 StringBuilder showMessage = new StringBuilder();
                 showMessage.append(mCurrentBook.title);
                 showMessage.append(" has been added to \"Want to read!\"");
@@ -61,7 +63,7 @@ public class ReplacingButtonFragment extends Fragment {
             } else {
                 mBookRepository.remove(mCurrentBook);
                 mReplacingButton.setText(WANT_TO_READ);
-                mReplacingButton.setBackgroundColor(Color.BLUE);
+                mReplacingButton.setBackgroundColor(R.color.colorLightBlue);
                 StringBuilder showMessage = new StringBuilder();
                 showMessage.append(mCurrentBook.title);
 

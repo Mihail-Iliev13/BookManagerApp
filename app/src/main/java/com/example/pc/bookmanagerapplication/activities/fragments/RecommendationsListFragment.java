@@ -43,6 +43,7 @@ public class RecommendationsListFragment extends Fragment {
         generateBookDetailsListContent();
 
         mRecommendations = mView.findViewById(R.id.lv_recommendations);
+
         mRecommendations.setOnItemClickListener((adapterView, view, i, l) -> {
             Intent toBookDetails =
                     new Intent(getContext(), BookDetailsActivity.class);

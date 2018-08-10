@@ -11,8 +11,8 @@
         android:layout_height="match_parent">
 
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/tb_menu"
+        <FrameLayout
+            android:id="@+id/menu"
             android:layout_width="match_parent"
             android:layout_height="40dp" />
 
@@ -21,15 +21,15 @@
             android:textStyle="bold"
             android:fontFamily="serif-monospace"
             android:layout_centerInParent="true"
-            android:layout_below="@+id/tb_menu"
+            android:layout_below="@+id/menu"
             android:padding="@dimen/material_drawer_account_header_dropdown"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:text="Choose your favourite genres of literature:"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <CheckBox
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:id="@+id/cb_fantasy"
             android:textSize="20sp"
             android:layout_below="@+id/tv_message"
@@ -40,7 +40,7 @@
             />
 
         <CheckBox
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:id="@+id/cb_classics"
             android:layout_marginTop="10dp"
             android:textSize="20sp"
@@ -52,7 +52,7 @@
             />
 
         <CheckBox
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:id="@+id/cb_horror"
             android:layout_marginTop="10dp"
             android:textSize="20sp"
@@ -66,7 +66,7 @@
 
 
         <CheckBox
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:id="@+id/cb_novels"
             android:layout_marginTop="10dp"
             android:textSize="20sp"
@@ -79,7 +79,7 @@
 
 
         <CheckBox
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:id="@+id/cb_mystery"
             android:layout_marginTop="10dp"
             android:textSize="20sp"
@@ -94,7 +94,7 @@
         <CheckBox
             android:id="@+id/cb_science_fiction"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:textSize="20sp"
             android:layout_below="@+id/cb_mystery"
             android:text="Science-Fiction"
@@ -104,7 +104,7 @@
             />
 
         <CheckBox
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:id="@+id/cb_biographies"
             android:textSize="20sp"

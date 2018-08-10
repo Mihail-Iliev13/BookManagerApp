@@ -2,15 +2,17 @@ package com.example.pc.bookmanagerapplication.activities.activities.drawerActivi
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.base.BaseDrawerActivity;
+import com.example.pc.bookmanagerapplication.activities.fragments.DrawerFragment;
 
-public class CurrentlyReadingActivity extends BaseDrawerActivity {
+public class CurrentlyReadingActivity extends AppCompatActivity {
 
     public static final long ID = 1;
-    Toolbar mToolbar;
+    private DrawerFragment mDrawer;
 
 
     @Override
@@ -18,20 +20,24 @@ public class CurrentlyReadingActivity extends BaseDrawerActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_currently_reading);
 
-        mToolbar = findViewById(R.id.tb_menu);
-        setSupportActionBar(mToolbar);
+        mDrawer = DrawerFragment.newInstance();
+        mDrawer.setID(ID);
+
+        setSupportActionBar(mDrawer.getToolbar());
+
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.menu, mDrawer)
+                .commit();
+
 
         Intent intent = getIntent();
 
     }
 
     @Override
-    protected Toolbar getDrawerToolbar() {
-        return mToolbar;
-    }
-
-    @Override
-    public long getIdentifier() {
-        return ID;
+    protected void onStart() {
+        super.onStart();
+        mDrawer.setupDrawer();
     }
 }
