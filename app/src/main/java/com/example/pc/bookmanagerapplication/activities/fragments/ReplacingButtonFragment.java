@@ -1,9 +1,7 @@
 package com.example.pc.bookmanagerapplication.activities.fragments;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -23,7 +21,8 @@ public class ReplacingButtonFragment extends Fragment {
 
     public static final String WANT_TO_READ = "Want to Read";
     Book mCurrentBook;
-    private Repository<Book> mBookRepository;
+    private Repository<Book> mBookCollectionToAddTo;
+    private Repository<Book> mBookCollectionToRemoveFrom;
     private Button mReplacingButton;
 
     public ReplacingButtonFragment() {
@@ -37,37 +36,53 @@ public class ReplacingButtonFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_replacing_button, container, false);
-        mBookRepository = BookManagerApp.getBookRepository(StringConstants.COLLECTION_WANT_TO_READ);
         mReplacingButton = view.findViewById(R.id.btn_replacing);
 
-        if (!mBookRepository.contains(mCurrentBook)) {
+
+        if (mBookCollectionToRemoveFrom.getCollectionName()
+                .equals(StringConstants.COLLECTION_RECOMMENDATIONS)) {
+
             mReplacingButton.setText(WANT_TO_READ);
-        } else {
+
+        } else if (mBookCollectionToRemoveFrom.getCollectionName()
+                .equals(StringConstants.COLLECTION_READ)) {
+
             mReplacingButton.setText("Remove");
-            mReplacingButton.setBackgroundColor(Color.RED);
+
+        } else {
+            mReplacingButton.setText("Read");
         }
 
 
         mReplacingButton.setOnClickListener(view1 -> {
-            String textString = String.valueOf(mReplacingButton.getText());;
-            if (textString.equals(WANT_TO_READ)) {
+            String textString = String.valueOf(mReplacingButton.getText());
 
-                mBookRepository.add(mCurrentBook);
-                mReplacingButton.setText("Remove");
+            if (textString.equals("Remove")) {
+
+                mBookCollectionToAddTo.remove(mCurrentBook);
+                mBookCollectionToRemoveFrom.add(mCurrentBook);
+
+                mReplacingButton.setText(mBookCollectionToAddTo.getCollectionName());
                 mReplacingButton.setBackgroundColor(R.color.colorAccent);
+
                 StringBuilder showMessage = new StringBuilder();
                 showMessage.append(mCurrentBook.title);
-                showMessage.append(" has been added to \"Want to read!\"");
+                showMessage.append(" has been removed from ");
+                showMessage.append(mBookCollectionToAddTo.getCollectionName());
+                showMessage.append(" list");
                 Toast.makeText(getContext(), showMessage.toString(), Toast.LENGTH_SHORT).show();
 
             } else {
-                mBookRepository.remove(mCurrentBook);
-                mReplacingButton.setText(WANT_TO_READ);
+                mBookCollectionToRemoveFrom.remove(mCurrentBook);
+                mBookCollectionToAddTo.add(mCurrentBook);
+
+                mReplacingButton.setText("Remove");
                 mReplacingButton.setBackgroundColor(R.color.colorLightBlue);
                 StringBuilder showMessage = new StringBuilder();
                 showMessage.append(mCurrentBook.title);
 
-                showMessage.append(" has been removed from \"Want to read!\"");
+                showMessage.append(" has been removed added to \"");
+                showMessage.append(mBookCollectionToAddTo.getCollectionName());
                 Toast.makeText(getContext(), showMessage.toString(), Toast.LENGTH_SHORT).show();
             }
 
@@ -82,5 +97,23 @@ public class ReplacingButtonFragment extends Fragment {
 
     public static ReplacingButtonFragment newInstance() {
         return new ReplacingButtonFragment();
+    }
+
+    public void setBookCollection(String collectionName) {
+        mBookCollectionToRemoveFrom = BookManagerApp.getBookRepository(collectionName);
+
+        switch (collectionName) {
+            case StringConstants.COLLECTION_RECOMMENDATIONS:
+                mBookCollectionToAddTo = BookManagerApp.getBookRepository(StringConstants.COLLECTION_WANT_TO_READ);
+                break;
+            case StringConstants.COLLECTION_WANT_TO_READ:
+                mBookCollectionToAddTo = BookManagerApp.getBookRepository(StringConstants.COLLECTION_READ);
+                break;
+            case StringConstants.COLLECTION_READ:
+                mBookCollectionToAddTo = BookManagerApp.getBookRepository(StringConstants.COLLECTION_RECOMMENDATIONS);
+                break;
+                default:
+                    break;
+        }
     }
 }
