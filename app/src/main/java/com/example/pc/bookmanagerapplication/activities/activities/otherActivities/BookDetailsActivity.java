@@ -5,8 +5,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.pc.bookmanagerapplication.R;
+import com.example.pc.bookmanagerapplication.activities.BookManagerApp;
+import com.example.pc.bookmanagerapplication.activities.StringConstants;
 import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.base.BaseDrawerActivity;
 import com.example.pc.bookmanagerapplication.activities.fragments.BookOutlookFragment;
 import com.example.pc.bookmanagerapplication.activities.fragments.DrawerFragment;
@@ -18,6 +22,8 @@ public class BookDetailsActivity extends AppCompatActivity {
     private BookOutlookFragment mBookOutlook;
     private DrawerFragment mDrawer;
     private ReplacingButtonFragment mReplacingButton;
+    private String mCollectionName;
+    private Book mBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,38 +31,69 @@ public class BookDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_details);
 
         Intent fromRecommendationList = getIntent();
-        Book book = (Book)fromRecommendationList.getSerializableExtra("BOOK");
+        mBook = (Book)fromRecommendationList.getSerializableExtra("BOOK");
+        mCollectionName = fromRecommendationList.getStringExtra("COLLECTION_NAME");
 
-        mBookOutlook = BookOutlookFragment.newInstance();
-        mBookOutlook.setBook(book);
+        if (mCollectionName.equals(StringConstants.COLLECTION_READ)) {
+            setContentView(R.layout.activity_one_button_book_details);
 
-        mReplacingButton = ReplacingButtonFragment.newInstance();
-        mReplacingButton.setCurrentBook(book);
+            mBookOutlook = BookOutlookFragment.newInstance();
+            mBookOutlook.setBook(mBook);
 
-        mDrawer = DrawerFragment.newInstance();
-        mDrawer.setID(-1);
+            mDrawer = DrawerFragment.newInstance();
+            mDrawer.setID(-1);
+
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.menu, mDrawer)
+                    .commit();
+
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.book_outlook, mBookOutlook)
+                    .commit();
 
 
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.menu, mDrawer)
-                .commit();
+        } else {
+            mBookOutlook = BookOutlookFragment.newInstance();
+            mBookOutlook.setBook(mBook);
 
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.book_outlook, mBookOutlook)
-                .commit();
+            mReplacingButton = ReplacingButtonFragment.newInstance();
+            mReplacingButton.setCurrentBook(mBook);
+            mReplacingButton.setBookCollection(mCollectionName);
 
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.replacing_button, mReplacingButton)
-                .commit();
 
+            mDrawer = DrawerFragment.newInstance();
+            mDrawer.setID(-1);
+
+
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.menu, mDrawer)
+                    .commit();
+
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.book_outlook, mBookOutlook)
+                    .commit();
+
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.replacing_button, mReplacingButton)
+                    .commit();
+        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         mDrawer.setupDrawer();
+    }
+
+    public void removeFromReadList(View view) {
+        BookManagerApp.getBookRepository(StringConstants.COLLECTION_READ).remove(mBook);
+        BookManagerApp.getBookRepository(StringConstants.COLLECTION_RECOMMENDATIONS).add(mBook);
+        Button button = view.findViewById(R.id.btn_remove);
+        button.setVisibility(View.INVISIBLE);
     }
 }
