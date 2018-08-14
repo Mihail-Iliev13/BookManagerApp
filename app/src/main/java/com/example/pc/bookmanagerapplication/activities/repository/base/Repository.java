@@ -13,7 +13,9 @@ public interface Repository<T> {
 
     void add (Book book);
 
-    boolean contains(T book);
+//    boolean contains(Book book);
 
     void remove (Book book);
+
+    String getCollectionName();
 }

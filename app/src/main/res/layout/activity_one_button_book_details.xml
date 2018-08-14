@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/book_outlook"
+            android:layout_below="@id/menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </FrameLayout>
+
+
+        <Button
+            android:id="@+id/btn_remove"
+            android:text="Remove"
+            android:background="@android:color/holo_red_light"
+            android:layout_below="@+id/book_outlook"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:onClick="removeFromReadList"
+            >
+
+        </Button>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

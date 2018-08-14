@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.fragments.RecommendationsListFragment">
+    tools:context=".activities.fragments.BookListFragment">
 
     <ListView
-        android:id="@+id/lv_recommendations"
+        android:id="@+id/lv_book_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

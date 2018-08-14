@@ -15,6 +15,12 @@
             android:layout_width="match_parent"
             android:layout_height="40dp" />
 
+        <FrameLayout
+            android:id="@+id/lv_book_list"
+            android:layout_below="@id/menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
