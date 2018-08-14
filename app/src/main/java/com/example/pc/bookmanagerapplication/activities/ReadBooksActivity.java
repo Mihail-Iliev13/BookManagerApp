@@ -6,7 +6,6 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.activities.StringConstants;
-import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.base.BaseDrawerActivity;
 import com.example.pc.bookmanagerapplication.activities.fragments.BookListFragment;
 import com.example.pc.bookmanagerapplication.activities.fragments.DrawerFragment;
 

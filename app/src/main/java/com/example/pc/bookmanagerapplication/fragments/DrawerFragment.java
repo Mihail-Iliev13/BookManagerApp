@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.pc.bookmanagerapplication.R;
-import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.CurrentlyReadingActivity;
 import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.GetRecommendationsActivity;
 import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.ReadBooksActivity;
 import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.WantToReadActivity;
@@ -58,16 +57,11 @@ public class DrawerFragment extends Fragment {
                 .withIdentifier(ReadBooksActivity.ID)
                 .withName(R.string.read_books);
 
-        PrimaryDrawerItem currentlyReading = new PrimaryDrawerItem()
-                .withIdentifier(CurrentlyReadingActivity.ID)
-                .withName(R.string.currently_reading);
 
         Drawer result = new DrawerBuilder()
                 .withActivity(getActivity())
                 .withToolbar(mToolbar)
                 .addDrawerItems(
-                        currentlyReading,
-                        new DividerDrawerItem(),
                         toReadList,
                         new DividerDrawerItem(),
                         readList,
@@ -95,10 +89,7 @@ public class DrawerFragment extends Fragment {
     }
 
     private Intent getNextIntent(long identifier) {
-        if (identifier == CurrentlyReadingActivity.ID) {
-            return new Intent(getContext(),
-                    CurrentlyReadingActivity.class);
-        } else if (identifier == WantToReadActivity.ID) {
+        if (identifier == WantToReadActivity.ID) {
             return new Intent(getContext(),
                     WantToReadActivity.class);
         } else if (identifier == ReadBooksActivity.ID){

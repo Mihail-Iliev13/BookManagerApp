@@ -11,7 +11,6 @@ import android.widget.Button;
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.activities.BookManagerApp;
 import com.example.pc.bookmanagerapplication.activities.StringConstants;
-import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.base.BaseDrawerActivity;
 import com.example.pc.bookmanagerapplication.activities.fragments.BookOutlookFragment;
 import com.example.pc.bookmanagerapplication.activities.fragments.DrawerFragment;
 import com.example.pc.bookmanagerapplication.activities.fragments.ReplacingButtonFragment;

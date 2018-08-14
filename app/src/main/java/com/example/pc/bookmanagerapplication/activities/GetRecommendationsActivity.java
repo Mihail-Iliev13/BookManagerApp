@@ -10,7 +10,6 @@ import android.widget.CheckBox;
 
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.activities.activities.otherActivities.RecommendationsListActivity;
-import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.base.BaseDrawerActivity;
 import com.example.pc.bookmanagerapplication.activities.fragments.DrawerFragment;
 
 import java.util.ArrayList;
