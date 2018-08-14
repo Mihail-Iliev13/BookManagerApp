@@ -1,4 +1,4 @@
-package com.example.pc.bookmanagerapplication.activities.fragments;
+package com.example.pc.bookmanagerapplication.fragments;
 
 
 import android.content.Intent;
@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.pc.bookmanagerapplication.R;
-import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.GetRecommendationsActivity;
-import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.ReadBooksActivity;
-import com.example.pc.bookmanagerapplication.activities.activities.drawerActivities.WantToReadActivity;
+import com.example.pc.bookmanagerapplication.activities.GetRecommendationsActivity;
+import com.example.pc.bookmanagerapplication.activities.ReadBooksActivity;
+import com.example.pc.bookmanagerapplication.activities.WantToReadActivity;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;

@@ -1,4 +1,4 @@
-package com.example.pc.bookmanagerapplication.activities.fragments;
+package com.example.pc.bookmanagerapplication.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,13 +9,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.R;
-import com.example.pc.bookmanagerapplication.activities.BookManagerApp;
-import com.example.pc.bookmanagerapplication.activities.StringConstants;
-import com.example.pc.bookmanagerapplication.activities.activities.otherActivities.BookDetailsActivity;
-import com.example.pc.bookmanagerapplication.activities.activities.otherActivities.RecommendationsListActivity;
+import com.example.pc.bookmanagerapplication.BookManagerApp;
+import com.example.pc.bookmanagerapplication.StringConstants;
+import com.example.pc.bookmanagerapplication.activities.RecommendationsListActivity;
+import com.example.pc.bookmanagerapplication.StringConstants;
+import com.example.pc.bookmanagerapplication.activities.BookDetailsActivity;
+import com.example.pc.bookmanagerapplication.activities.RecommendationsListActivity;
 import com.example.pc.bookmanagerapplication.activities.models.Book;
-import com.example.pc.bookmanagerapplication.activities.repository.base.Repository;
+import com.example.pc.bookmanagerapplication.repository.base.Repository;
 
 
 public class BookListFragment extends Fragment {
@@ -47,8 +50,8 @@ public class BookListFragment extends Fragment {
                     new Intent(getContext(), BookDetailsActivity.class);
 
             Book book = mAdatper.getItem(i);
-            toBookDetails.putExtra("BOOK", book);
-            toBookDetails.putExtra("COLLECTION_NAME", mBookCollection.getCollectionName());
+            toBookDetails.putExtra(StringConstants.BOOK, book);
+            toBookDetails.putExtra(StringConstants.COLLECTION_NAME, mBookCollection.getCollectionName());
             startActivity(toBookDetails);
         });
 
@@ -69,7 +72,7 @@ public class BookListFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        if (mBookCollection.getCollectionName().equals(StringConstants.COLLECTION_RECOMMENDATIONS)) {
+        if (mBookCollection.getCollectionName().equals(StringConstants.RECOMMENDATIONS)) {
             mBookCollection.getAll(books -> {
 
                 for (Book book : books) {

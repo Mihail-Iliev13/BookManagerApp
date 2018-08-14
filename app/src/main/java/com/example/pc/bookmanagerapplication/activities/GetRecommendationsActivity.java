@@ -1,4 +1,4 @@
-package com.example.pc.bookmanagerapplication.activities.activities.drawerActivities;
+package com.example.pc.bookmanagerapplication.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 import com.example.pc.bookmanagerapplication.R;
-import com.example.pc.bookmanagerapplication.activities.activities.otherActivities.RecommendationsListActivity;
-import com.example.pc.bookmanagerapplication.activities.fragments.DrawerFragment;
+import com.example.pc.bookmanagerapplication.activities.RecommendationsListActivity;
+import com.example.pc.bookmanagerapplication.fragments.DrawerFragment;
 
 import java.util.ArrayList;
 import java.util.HashSet;

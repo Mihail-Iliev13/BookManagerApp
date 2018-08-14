@@ -1,4 +1,4 @@
-package com.example.pc.bookmanagerapplication.activities.fragments;
+package com.example.pc.bookmanagerapplication.fragments;
 
 import android.content.Context;
 import android.net.Uri;

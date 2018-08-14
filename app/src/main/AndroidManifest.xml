@@ -3,24 +3,24 @@
     package="com.example.pc.bookmanagerapplication">
 
     <application
-        android:name=".activities.BookManagerApp"
+        android:name=".BookManagerApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.activities.drawerActivities.GetRecommendationsActivity">
+        <activity android:name=".activities.GetRecommendationsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.activities.drawerActivities.WantToReadActivity" />
-        <activity android:name=".activities.activities.drawerActivities.ReadBooksActivity" />
-        <activity android:name=".activities.activities.otherActivities.RecommendationsListActivity" />
-        <activity android:name=".activities.activities.otherActivities.BookDetailsActivity"></activity>
+        <activity android:name=".activities.WantToReadActivity" />
+        <activity android:name=".activities.ReadBooksActivity" />
+        <activity android:name=".activities.RecommendationsListActivity" />
+        <activity android:name=".activities.BookDetailsActivity"></activity>
     </application>
 
 </manifest>

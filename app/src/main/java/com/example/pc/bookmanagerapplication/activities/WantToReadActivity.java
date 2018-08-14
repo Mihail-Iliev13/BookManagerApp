@@ -1,12 +1,12 @@
-package com.example.pc.bookmanagerapplication.activities.activities.drawerActivities;
+package com.example.pc.bookmanagerapplication.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.pc.bookmanagerapplication.R;
-import com.example.pc.bookmanagerapplication.activities.StringConstants;
-import com.example.pc.bookmanagerapplication.activities.fragments.BookListFragment;
-import com.example.pc.bookmanagerapplication.activities.fragments.DrawerFragment;
+import com.example.pc.bookmanagerapplication.StringConstants;
+import com.example.pc.bookmanagerapplication.fragments.BookListFragment;
+import com.example.pc.bookmanagerapplication.fragments.DrawerFragment;
 
 public class WantToReadActivity extends AppCompatActivity {
 
@@ -42,6 +42,6 @@ public class WantToReadActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mDrawer.setupDrawer();
-        mListFragment.setBookCollection(StringConstants.COLLECTION_WANT_TO_READ);
+        mListFragment.setBookCollection(StringConstants.WANT_TO_READ);
     }
 }

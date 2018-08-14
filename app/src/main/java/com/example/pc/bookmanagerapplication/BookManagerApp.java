@@ -1,12 +1,11 @@
-package com.example.pc.bookmanagerapplication.activities;
+package com.example.pc.bookmanagerapplication;
 
 import android.app.Application;
 
+import com.example.pc.bookmanagerapplication.StringConstants;
 import com.example.pc.bookmanagerapplication.activities.models.Book;
-import com.example.pc.bookmanagerapplication.activities.repository.BookRepository;
-import com.example.pc.bookmanagerapplication.activities.repository.base.Repository;
-
-import java.util.HashSet;
+import com.example.pc.bookmanagerapplication.repository.BookRepository;
+import com.example.pc.bookmanagerapplication.repository.base.Repository;
 
 public class BookManagerApp extends Application {
 
@@ -18,21 +17,21 @@ public class BookManagerApp extends Application {
 
         switch (collectionName) {
 
-            case StringConstants.COLLECTION_RECOMMENDATIONS:
+            case StringConstants.RECOMMENDATIONS:
 
                 if (bookRecommendationsRepository == null) {
                     bookRecommendationsRepository = new BookRepository<>(Book.class, collectionName);
                 }
                 return bookRecommendationsRepository;
 
-            case StringConstants.COLLECTION_WANT_TO_READ:
+            case StringConstants.WANT_TO_READ:
 
                 if (wantToReadBookRepository == null) {
                     wantToReadBookRepository = new BookRepository<>(Book.class, collectionName);
                 }
                 return wantToReadBookRepository;
 
-                case StringConstants.COLLECTION_READ:
+                case StringConstants.READ_LIST:
                     if (readBookRepository == null) {
                         readBookRepository = new BookRepository<>(Book.class, collectionName);
                     }

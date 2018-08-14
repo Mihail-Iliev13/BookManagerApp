@@ -1,4 +1,4 @@
-package com.example.pc.bookmanagerapplication.activities.fragments;
+package com.example.pc.bookmanagerapplication.fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.R;
-import com.example.pc.bookmanagerapplication.activities.BookManagerApp;
-import com.example.pc.bookmanagerapplication.activities.StringConstants;
+import com.example.pc.bookmanagerapplication.BookManagerApp;
+import com.example.pc.bookmanagerapplication.StringConstants;
+import com.example.pc.bookmanagerapplication.StringConstants;
 import com.example.pc.bookmanagerapplication.activities.models.Book;
-import com.example.pc.bookmanagerapplication.activities.repository.base.Repository;
+import com.example.pc.bookmanagerapplication.repository.base.Repository;
 
 
 public class ReplacingButtonFragment extends Fragment {
@@ -40,13 +42,13 @@ public class ReplacingButtonFragment extends Fragment {
 
 
         if (mBookCollection.getCollectionName()
-                .equals(StringConstants.COLLECTION_RECOMMENDATIONS)) {
+                .equals(StringConstants.RECOMMENDATIONS)) {
 
             mFirstButton.setText(WANT_TO_READ);
             mSecondButton.setText("Mark as read");
 
         } else if (mBookCollection.getCollectionName()
-                .equals(StringConstants.COLLECTION_WANT_TO_READ)) {
+                .equals(StringConstants.WANT_TO_READ)) {
 
             mFirstButton.setText("Mark as read");
             mSecondButton.setText("Remove");
@@ -60,7 +62,7 @@ public class ReplacingButtonFragment extends Fragment {
             if (textString.equals(WANT_TO_READ)) {
                 mBookCollection.remove(mCurrentBook);
                 BookManagerApp
-                        .getBookRepository(StringConstants.COLLECTION_WANT_TO_READ)
+                        .getBookRepository(StringConstants.WANT_TO_READ)
                         .add(mCurrentBook);
 
                 mFirstButton.setVisibility(View.INVISIBLE);
@@ -69,20 +71,20 @@ public class ReplacingButtonFragment extends Fragment {
                 StringBuilder showMessage = new StringBuilder();
                 showMessage.append(mCurrentBook.title);
                 showMessage.append(" has been successfully added to ");
-                showMessage.append(StringConstants.COLLECTION_WANT_TO_READ);
+                showMessage.append(StringConstants.WANT_TO_READ);
                 showMessage.append(" list");
                 Toast.makeText(getContext(), showMessage.toString(), Toast.LENGTH_SHORT).show();
 
             } else {
                 mBookCollection.remove(mCurrentBook);
-                BookManagerApp.getBookRepository(StringConstants.COLLECTION_READ).add(mCurrentBook);
+                BookManagerApp.getBookRepository(StringConstants.READ_LIST).add(mCurrentBook);
 
                 mFirstButton.setVisibility(View.INVISIBLE);
                 mSecondButton.setVisibility(View.INVISIBLE);
                 StringBuilder showMessage = new StringBuilder();
                 showMessage.append(mCurrentBook.title);
                 showMessage.append(" has been successfully added to \"");
-                showMessage.append(StringConstants.COLLECTION_READ);
+                showMessage.append(StringConstants.READ_LIST);
                 showMessage.append(" list");
                 Toast.makeText(getContext(), showMessage.toString(), Toast.LENGTH_SHORT).show();
             }
@@ -94,7 +96,7 @@ public class ReplacingButtonFragment extends Fragment {
 
             if (textString.equals("Mark as read")) {
                 mBookCollection.remove(mCurrentBook);
-                BookManagerApp.getBookRepository(StringConstants.COLLECTION_READ)
+                BookManagerApp.getBookRepository(StringConstants.READ_LIST)
                         .add(mCurrentBook);
 
                 mFirstButton.setVisibility(View.INVISIBLE);
@@ -102,13 +104,13 @@ public class ReplacingButtonFragment extends Fragment {
                 StringBuilder showMessage = new StringBuilder();
                 showMessage.append(mCurrentBook.title);
                 showMessage.append(" has been successfully added to \"");
-                showMessage.append(StringConstants.COLLECTION_READ);
+                showMessage.append(StringConstants.READ_LIST);
                 showMessage.append(" list");
                 Toast.makeText(getContext(), showMessage.toString(), Toast.LENGTH_SHORT).show();
 
             } else {
                 mBookCollection.remove(mCurrentBook);
-                BookManagerApp.getBookRepository(StringConstants.COLLECTION_RECOMMENDATIONS)
+                BookManagerApp.getBookRepository(StringConstants.RECOMMENDATIONS)
                         .add(mCurrentBook);
 
                 mFirstButton.setVisibility(View.INVISIBLE);
@@ -116,7 +118,7 @@ public class ReplacingButtonFragment extends Fragment {
                 StringBuilder showMessage = new StringBuilder();
                 showMessage.append(mCurrentBook.title);
                 showMessage.append(" has been removed from \"");
-                showMessage.append(StringConstants.COLLECTION_WANT_TO_READ);
+                showMessage.append(StringConstants.WANT_TO_READ);
                 showMessage.append(" list");
                 Toast.makeText(getContext(), showMessage.toString(), Toast.LENGTH_SHORT).show();
 

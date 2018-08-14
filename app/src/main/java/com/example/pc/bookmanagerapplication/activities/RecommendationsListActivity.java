@@ -1,15 +1,17 @@
-package com.example.pc.bookmanagerapplication.activities.activities.otherActivities;
+package com.example.pc.bookmanagerapplication.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 
+import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.R;
-import com.example.pc.bookmanagerapplication.activities.BookManagerApp;
-import com.example.pc.bookmanagerapplication.activities.StringConstants;
-import com.example.pc.bookmanagerapplication.activities.fragments.DrawerFragment;
-import com.example.pc.bookmanagerapplication.activities.fragments.BookListFragment;
+import com.example.pc.bookmanagerapplication.BookManagerApp;
+import com.example.pc.bookmanagerapplication.StringConstants;
+import com.example.pc.bookmanagerapplication.StringConstants;
+import com.example.pc.bookmanagerapplication.fragments.DrawerFragment;
+import com.example.pc.bookmanagerapplication.fragments.BookListFragment;
 import com.example.pc.bookmanagerapplication.activities.models.Book;
 
 import java.util.HashSet;
@@ -51,7 +53,7 @@ public class RecommendationsListActivity extends AppCompatActivity {
 
     private void generateBookListContent() {
         mAdapter = new ArrayAdapter<Book>(this, android.R.layout.simple_list_item_1);
-        BookManagerApp.getBookRepository(StringConstants.COLLECTION_RECOMMENDATIONS).getAll(books -> {
+        BookManagerApp.getBookRepository(StringConstants.RECOMMENDATIONS).getAll(books -> {
 
             for (Book book : books) {
 
@@ -68,6 +70,6 @@ public class RecommendationsListActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mDrawer.setupDrawer();
-        mListFragment.setBookCollection(StringConstants.COLLECTION_RECOMMENDATIONS);
+        mListFragment.setBookCollection(StringConstants.RECOMMENDATIONS);
     }
 }

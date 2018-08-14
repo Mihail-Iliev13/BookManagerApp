@@ -1,4 +1,4 @@
-package com.example.pc.bookmanagerapplication.activities.repository.base;
+package com.example.pc.bookmanagerapplication.repository.base;
 
 import android.content.Context;
 

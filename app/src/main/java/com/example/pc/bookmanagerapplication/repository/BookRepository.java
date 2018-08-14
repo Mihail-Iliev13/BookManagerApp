@@ -1,10 +1,10 @@
-package com.example.pc.bookmanagerapplication.activities.repository;
+package com.example.pc.bookmanagerapplication.repository;
 
 import android.support.annotation.NonNull;
 
-import com.example.pc.bookmanagerapplication.activities.StringConstants;
+import com.example.pc.bookmanagerapplication.StringConstants;
 import com.example.pc.bookmanagerapplication.activities.models.Book;
-import com.example.pc.bookmanagerapplication.activities.repository.base.Repository;
+import com.example.pc.bookmanagerapplication.repository.base.Repository;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
