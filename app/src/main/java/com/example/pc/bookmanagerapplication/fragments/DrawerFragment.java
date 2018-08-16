@@ -1,7 +1,9 @@
 package com.example.pc.bookmanagerapplication.fragments;
 
 
+import android.accounts.Account;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +15,8 @@ import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.activities.GetRecommendationsActivity;
 import com.example.pc.bookmanagerapplication.activities.ReadBooksActivity;
 import com.example.pc.bookmanagerapplication.activities.WantToReadActivity;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -46,16 +50,18 @@ public class DrawerFragment extends Fragment {
 
         PrimaryDrawerItem recommendations = new PrimaryDrawerItem()
                 .withIdentifier(GetRecommendationsActivity.ID)
+                .withIcon(R.drawable.ic_help_black_24dp)
                 .withName(R.string.recommendations);
 
         PrimaryDrawerItem toReadList = new PrimaryDrawerItem()
                 .withIdentifier(WantToReadActivity.ID)
-                .withName(R.string.want_to_read);
+                .withName(R.string.want_to_read)
+                .withIcon(R.drawable.ic_local_library_black_24dp);
 
         PrimaryDrawerItem readList = new PrimaryDrawerItem()
                 .withIdentifier(ReadBooksActivity.ID)
-                .withName(R.string.read_books);
-
+                .withName(R.string.read_books)
+                .withIcon(R.drawable.ic_check_circle_black_24dp);
 
         Drawer result = new DrawerBuilder()
                 .withActivity(getActivity())
