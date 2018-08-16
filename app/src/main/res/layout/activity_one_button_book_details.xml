@@ -29,8 +29,13 @@
             android:text="@string/remove"
             android:background="@android:color/holo_red_light"
             android:layout_below="@+id/book_outlook"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="25sp"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:onClick="removeFromReadList"
             >
 

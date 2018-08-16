@@ -14,24 +14,24 @@
         android:id="@+id/btn_button1"
         android:text=""
         android:layout_marginTop="15dp"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="30dp"
         android:padding="10dp"
-        android:textSize="25sp"
+        android:textSize="17sp"
         android:background="@android:color/holo_blue_light"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="150dp"
+        android:layout_height="50dp" />
 
     <Button
         android:id="@+id/btn_button2"
         android:layout_toEndOf="@+id/btn_button1"
         android:text=""
         android:padding="10dp"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
-        android:textSize="25sp"
+        android:textSize="17sp"
         android:background="@android:color/holo_red_light"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="150dp"
+        android:layout_height="50dp" />
 
   </RelativeLayout>
 
