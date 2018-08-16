@@ -1,5 +1,6 @@
 package com.example.pc.bookmanagerapplication.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -8,9 +9,8 @@ import com.example.pc.bookmanagerapplication.StringConstants;
 import com.example.pc.bookmanagerapplication.fragments.BookListFragment;
 import com.example.pc.bookmanagerapplication.fragments.DrawerFragment;
 
-public class WantToReadActivity extends AppCompatActivity {
+public class BookListActivity extends AppCompatActivity {
 
-    public static final long ID = 2;
     private DrawerFragment mDrawer;
     private BookListFragment mBookListFragment;
 
@@ -18,11 +18,15 @@ public class WantToReadActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_want_to_read);
+        setContentView(R.layout.activity_book_list);
 
         mDrawer = DrawerFragment.newInstance();
-        mDrawer.setID(ID);
+
+        mDrawer.setID(getIntent()
+                .getLongExtra(StringConstants.CURRENT_ID, 0));
+
         setSupportActionBar(mDrawer.getToolbar());
+
 
         mBookListFragment = BookListFragment.newInstance();
 
@@ -42,6 +46,8 @@ public class WantToReadActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mDrawer.setupDrawer();
-        mBookListFragment.setBookCollection(StringConstants.WANT_TO_READ);
+        Intent fromDrawer = getIntent();
+        mBookListFragment.setBookCollection(
+                fromDrawer.getStringExtra(StringConstants.COLLECTION_NAME));
     }
 }

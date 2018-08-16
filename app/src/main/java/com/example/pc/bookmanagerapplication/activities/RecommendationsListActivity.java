@@ -3,7 +3,6 @@ package com.example.pc.bookmanagerapplication.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.StringConstants;
@@ -16,14 +15,15 @@ import java.util.HashSet;
 public class RecommendationsListActivity extends AppCompatActivity {
 
     public static HashSet<String> mSelectedGenres;
-    private BookListFragment mListFragment;
     private DrawerFragment mDrawer;
+    private BookListFragment mListFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recommendations_list);
+        setContentView(R.layout.activity_book_list);
 
         Intent intent = getIntent();
         mSelectedGenres = (HashSet<String>) intent.getSerializableExtra(StringConstants.SELECTED_GENRES);
@@ -40,7 +40,7 @@ public class RecommendationsListActivity extends AppCompatActivity {
 
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.lv_content, mListFragment)
+                .replace(R.id.lv_book_list, mListFragment)
                 .commit();
 
     }

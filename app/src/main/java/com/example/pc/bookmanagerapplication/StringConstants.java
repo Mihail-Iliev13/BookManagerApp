@@ -9,5 +9,6 @@ public class StringConstants {
     public static final String COLLECTION_NAME = "Collection name";
     public static final String SELECTED_GENRES = "Selected genres";
     public static final String MARK_AS_READ = "Mark as read";
-    public static String REMOVE = "Remove";
+    public static final String REMOVE = "Remove";
+    public static final String CURRENT_ID = "Current ID";
 }

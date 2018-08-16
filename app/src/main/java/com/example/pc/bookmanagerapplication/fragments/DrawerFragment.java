@@ -1,9 +1,7 @@
 package com.example.pc.bookmanagerapplication.fragments;
 
 
-import android.accounts.Account;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -12,11 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.pc.bookmanagerapplication.R;
+import com.example.pc.bookmanagerapplication.StringConstants;
 import com.example.pc.bookmanagerapplication.activities.GetRecommendationsActivity;
-import com.example.pc.bookmanagerapplication.activities.ReadBooksActivity;
-import com.example.pc.bookmanagerapplication.activities.WantToReadActivity;
-import com.mikepenz.materialdrawer.AccountHeader;
-import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.example.pc.bookmanagerapplication.activities.BookListActivity;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -26,6 +22,9 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 public class DrawerFragment extends Fragment {
     private long mCurrentActivityID;
     private android.support.v7.widget.Toolbar mToolbar;
+    public static final long WANT_TO_READ_ID = 2;
+    public static final long READ_BOOKS_LIST_ID = 3;
+    public static final long GET_RECOMMENDATIONS_ID = 4;
 
     public DrawerFragment() {
         // Required empty public constructor
@@ -49,17 +48,17 @@ public class DrawerFragment extends Fragment {
     public void setupDrawer() {
 
         PrimaryDrawerItem recommendations = new PrimaryDrawerItem()
-                .withIdentifier(GetRecommendationsActivity.ID)
+                .withIdentifier(GET_RECOMMENDATIONS_ID)
                 .withIcon(R.drawable.ic_help_black_24dp)
                 .withName(R.string.recommendations);
 
         PrimaryDrawerItem toReadList = new PrimaryDrawerItem()
-                .withIdentifier(WantToReadActivity.ID)
+                .withIdentifier(WANT_TO_READ_ID)
                 .withName(R.string.want_to_read)
                 .withIcon(R.drawable.ic_local_library_black_24dp);
 
         PrimaryDrawerItem readList = new PrimaryDrawerItem()
-                .withIdentifier(ReadBooksActivity.ID)
+                .withIdentifier(READ_BOOKS_LIST_ID)
                 .withName(R.string.read_books)
                 .withIcon(R.drawable.ic_check_circle_black_24dp);
 
@@ -75,7 +74,6 @@ public class DrawerFragment extends Fragment {
                 )
                 .withOnDrawerItemClickListener((view, position, drawerItem) -> {
                     long identifier = drawerItem.getIdentifier();
-
 
                     if (mCurrentActivityID == identifier) {
                         return false;
@@ -95,18 +93,27 @@ public class DrawerFragment extends Fragment {
 
     private Intent getNextIntent(long identifier) {
 
-        if (identifier == WantToReadActivity.ID) {
+        if (identifier == WANT_TO_READ_ID) {
 
-            return new Intent(getContext(),
-                    WantToReadActivity.class);
+            Intent intent = new Intent(getContext(), BookListActivity.class);
+            intent.putExtra(StringConstants.COLLECTION_NAME ,StringConstants.WANT_TO_READ);
+            intent.putExtra(StringConstants.CURRENT_ID, WANT_TO_READ_ID);
 
-        } else if (identifier == ReadBooksActivity.ID){
+            return intent;
 
-            return new Intent(getContext(), ReadBooksActivity.class);
+        } else if (identifier == READ_BOOKS_LIST_ID){
 
-        } else if (identifier == GetRecommendationsActivity.ID) {
+            Intent intent = new Intent(getContext(), BookListActivity.class);
+            intent.putExtra(StringConstants.COLLECTION_NAME, StringConstants.READ_LIST);
+            intent.putExtra(StringConstants.CURRENT_ID, READ_BOOKS_LIST_ID);
 
-            return new Intent(getContext(), GetRecommendationsActivity.class);
+            return intent;
+
+        } else if (identifier == GET_RECOMMENDATIONS_ID) {
+
+            Intent intent = new Intent(getContext(), GetRecommendationsActivity.class);
+            intent.putExtra(StringConstants.CURRENT_ID, GET_RECOMMENDATIONS_ID);
+            return intent;
 
         } else {
             return null;

@@ -17,8 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.WantToReadActivity" />
-        <activity android:name=".activities.ReadBooksActivity" />
+        <activity android:name=".activities.BookListActivity" />
         <activity android:name=".activities.RecommendationsListActivity" />
         <activity android:name=".activities.BookDetailsActivity" />
 

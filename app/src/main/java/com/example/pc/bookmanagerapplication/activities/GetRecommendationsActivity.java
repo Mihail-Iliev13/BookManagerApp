@@ -16,7 +16,6 @@ import java.util.HashSet;
 
 public class GetRecommendationsActivity extends AppCompatActivity{
 
-    public static final long ID = 4;
     private HashSet<String> mSelectedGenres;
     private DrawerFragment mDrawer;
     private Button mButton;
@@ -27,6 +26,10 @@ public class GetRecommendationsActivity extends AppCompatActivity{
         setContentView(R.layout.activity_get_recommendations);
 
         mDrawer = DrawerFragment.newInstance();
+
+        mDrawer.setID(getIntent()
+                .getLongExtra(StringConstants.CURRENT_ID, 0));
+
         setSupportActionBar(mDrawer.getToolbar());
 
         getFragmentManager()
