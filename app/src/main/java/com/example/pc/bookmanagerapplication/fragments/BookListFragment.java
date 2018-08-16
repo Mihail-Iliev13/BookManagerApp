@@ -76,7 +76,6 @@ public class BookListFragment extends Fragment {
                             .contains(book.genre)) {
 
                         mAdapter.add(book);
-
                     }
                 }
             });

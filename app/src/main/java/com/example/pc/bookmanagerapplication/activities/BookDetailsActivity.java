@@ -3,8 +3,12 @@ package com.example.pc.bookmanagerapplication.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.R;
@@ -100,5 +104,22 @@ public class BookDetailsActivity extends AppCompatActivity {
 
         Button button = view.findViewById(R.id.btn_remove);
         button.setVisibility(View.INVISIBLE);
+        String message = String.format("%s has been removed from \"Read Books\" list", mBook.title);
+        showToast(message);
+
+    }
+
+    public void showToast (String message) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast_layout,
+                (ViewGroup)findViewById(R.id.ll_toast_root));
+
+        layout.findViewById(R.id.tv_toast_message);
+        TextView tv = layout.findViewById(R.id.tv_toast_message);
+        tv.setText(message);
+        Toast toast = new Toast(this);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
     }
 }

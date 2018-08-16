@@ -28,16 +28,15 @@
             android:textStyle="bold" />
 
         <CheckBox
-            android:layout_marginStart="10dp"
             android:id="@+id/cb_fantasy"
-            android:textSize="20sp"
-            android:layout_below="@+id/tv_message"
-            android:text="@string/fantasy"
-            android:fontFamily="@font/berkshire_swash"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_message"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/berkshire_swash"
             android:onClick="selectItem"
-            />
+            android:text="@string/fantasy"
+            android:textSize="20sp" />
 
         <CheckBox
             android:layout_marginStart="10dp"

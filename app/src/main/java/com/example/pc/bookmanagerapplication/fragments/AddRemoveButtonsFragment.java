@@ -1,11 +1,14 @@
 package com.example.pc.bookmanagerapplication.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pc.bookmanagerapplication.BookManagerApp;
@@ -25,7 +28,6 @@ public class AddRemoveButtonsFragment extends Fragment {
     public AddRemoveButtonsFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -98,13 +100,10 @@ public class AddRemoveButtonsFragment extends Fragment {
 
     private void showSuccessfullyAddedMessage(String listName) {
 
-        String showMessage = String.format("\"%s\" has been successfully added to %s list",
+        String message = String.format("\"%s\" has been successfully added to \"%s\" list",
                 mCurrentBook.title, listName);
 
-        Toast.makeText(getContext(),
-                showMessage,
-                Toast.LENGTH_SHORT)
-                .show();
+        showToast(message);
     }
 
     private void markAsRead(){
@@ -114,9 +113,10 @@ public class AddRemoveButtonsFragment extends Fragment {
 
         transferBook(from, to);
 
-        showSuccessfullyAddedMessage(StringConstants.READ_LIST);
+        showSuccessfullyAddedMessage(StringConstants.READ_BOOKS);
 
     }
+
 
     private void removeFromList(){
 
@@ -126,12 +126,10 @@ public class AddRemoveButtonsFragment extends Fragment {
 
         transferBook(from, to);
 
-        String showMessage = String.format("\"%s\" has been removed from Want to read list",
+        String message = String.format("\"%s\" has been removed from Want to read list",
                 mCurrentBook.title);
 
-        Toast.makeText(getContext(), showMessage, Toast.LENGTH_SHORT)
-                .show();
-
+        showToast(message);
     }
 
     private void setButtonsText(String first, String second ){
@@ -146,5 +144,19 @@ public class AddRemoveButtonsFragment extends Fragment {
 
         mFirstButton.setVisibility(View.INVISIBLE);
         mSecondButton.setVisibility(View.INVISIBLE);
+    }
+
+    private void showToast(String message) {
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast_layout,
+                (ViewGroup)getActivity().findViewById(R.id.ll_toast_root));
+
+        layout.findViewById(R.id.tv_toast_message);
+        TextView tv = layout.findViewById(R.id.tv_toast_message);
+        tv.setText(message);
+        Toast toast = new Toast(getContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
     }
 }
