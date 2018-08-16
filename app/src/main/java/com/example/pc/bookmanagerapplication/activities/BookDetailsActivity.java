@@ -8,20 +8,17 @@ import android.widget.Button;
 
 import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.R;
-import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.StringConstants;
-import com.example.pc.bookmanagerapplication.StringConstants;
-import com.example.pc.bookmanagerapplication.activities.models.Book;
+import com.example.pc.bookmanagerapplication.models.Book;
 import com.example.pc.bookmanagerapplication.fragments.BookOutlookFragment;
 import com.example.pc.bookmanagerapplication.fragments.DrawerFragment;
-import com.example.pc.bookmanagerapplication.fragments.ReplacingButtonFragment;
+import com.example.pc.bookmanagerapplication.fragments.AddRemoveButtonsFragment;
 
-//TODO add image, change layout, add "want to read" button, and "read" button, add infromation fragment
 public class BookDetailsActivity extends AppCompatActivity {
 
     private BookOutlookFragment mBookOutlook;
     private DrawerFragment mDrawer;
-    private ReplacingButtonFragment mAddRemoveButton;
+    private AddRemoveButtonsFragment mAddRemoveButton;
     private String mCollectionName;
     private Book mBook;
 
@@ -31,12 +28,17 @@ public class BookDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_details);
 
         Intent fromOtherActivity = getIntent();
-        mBook = (Book) fromOtherActivity.getSerializableExtra(StringConstants.BOOK);
-        mCollectionName = fromOtherActivity.getStringExtra(StringConstants.COLLECTION_NAME);
+
+        mBook = (Book) fromOtherActivity
+                .getSerializableExtra(StringConstants.BOOK);
+
+        mCollectionName = fromOtherActivity
+                .getStringExtra(StringConstants.COLLECTION_NAME);
+
 
         if (!mCollectionName.equals(StringConstants.READ_LIST)) {
 
-            mAddRemoveButton = ReplacingButtonFragment.newInstance();
+            mAddRemoveButton = AddRemoveButtonsFragment.newInstance();
             mAddRemoveButton.setCurrentBook(mBook);
             mAddRemoveButton.setBookCollection(mCollectionName);
 
@@ -47,6 +49,11 @@ public class BookDetailsActivity extends AppCompatActivity {
 
 
         } else {
+            /*
+            if you came to this activity from ReadBooks activity
+            set a layout with only one button (Remove button)
+             */
+
             setContentView(R.layout.activity_one_button_book_details);
         }
 
@@ -75,9 +82,22 @@ public class BookDetailsActivity extends AppCompatActivity {
         mDrawer.setupDrawer();
     }
 
+
+    /*
+     This method removes the book from Read List
+     and puts it back to Recommendations
+
+     The method is called only when you came to this activity
+     fom ReadBooks activity and the onclick listener is defined in
+     the layout - activity_one_button_book_details
+     */
     public void removeFromReadList(View view) {
-        BookManagerApp.getBookRepository(StringConstants.READ_LIST).remove(mBook);
-        BookManagerApp.getBookRepository(StringConstants.RECOMMENDATIONS).add(mBook);
+        BookManagerApp.getBookRepository(StringConstants.READ_LIST)
+                .remove(mBook);
+
+        BookManagerApp.getBookRepository(StringConstants.RECOMMENDATIONS)
+                .add(mBook);
+
         Button button = view.findViewById(R.id.btn_remove);
         button.setVisibility(View.INVISIBLE);
     }

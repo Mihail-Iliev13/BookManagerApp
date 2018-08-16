@@ -20,7 +20,7 @@
         <activity android:name=".activities.WantToReadActivity" />
         <activity android:name=".activities.ReadBooksActivity" />
         <activity android:name=".activities.RecommendationsListActivity" />
-        <activity android:name=".activities.BookDetailsActivity"></activity>
+        <activity android:name=".activities.BookDetailsActivity" />
     </application>
 
 </manifest>

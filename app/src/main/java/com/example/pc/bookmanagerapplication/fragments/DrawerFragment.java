@@ -35,7 +35,6 @@ public class DrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_drawer, container, false);
 
         mToolbar = view.findViewById(R.id.tb_menu);
@@ -44,7 +43,7 @@ public class DrawerFragment extends Fragment {
     }
 
     public void setupDrawer() {
-        //if you want to update the items at a later time it is recommended to keep it in a variable
+
         PrimaryDrawerItem recommendations = new PrimaryDrawerItem()
                 .withIdentifier(GetRecommendationsActivity.ID)
                 .withName(R.string.recommendations);
@@ -89,13 +88,20 @@ public class DrawerFragment extends Fragment {
     }
 
     private Intent getNextIntent(long identifier) {
+
         if (identifier == WantToReadActivity.ID) {
+
             return new Intent(getContext(),
                     WantToReadActivity.class);
+
         } else if (identifier == ReadBooksActivity.ID){
+
             return new Intent(getContext(), ReadBooksActivity.class);
+
         } else if (identifier == GetRecommendationsActivity.ID) {
+
             return new Intent(getContext(), GetRecommendationsActivity.class);
+
         } else {
             return null;
         }

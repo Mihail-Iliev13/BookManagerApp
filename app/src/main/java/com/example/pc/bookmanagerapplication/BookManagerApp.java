@@ -2,16 +2,15 @@ package com.example.pc.bookmanagerapplication;
 
 import android.app.Application;
 
-import com.example.pc.bookmanagerapplication.StringConstants;
-import com.example.pc.bookmanagerapplication.activities.models.Book;
+import com.example.pc.bookmanagerapplication.models.Book;
 import com.example.pc.bookmanagerapplication.repository.BookRepository;
 import com.example.pc.bookmanagerapplication.repository.base.Repository;
 
 public class BookManagerApp extends Application {
 
-    private static Repository<Book> bookRecommendationsRepository;
-    private static Repository<Book> wantToReadBookRepository;
-    private static Repository<Book> readBookRepository;
+    private static Repository<Book> bookRecommendationsCollection;
+    private static Repository<Book> wantToReadBookCollection;
+    private static Repository<Book> readBookCollection;
 
     public static Repository<Book> getBookRepository(String collectionName){
 
@@ -19,27 +18,25 @@ public class BookManagerApp extends Application {
 
             case StringConstants.RECOMMENDATIONS:
 
-                if (bookRecommendationsRepository == null) {
-                    bookRecommendationsRepository = new BookRepository<>(Book.class, collectionName);
+                if (bookRecommendationsCollection == null) {
+                    bookRecommendationsCollection = new BookRepository<>(Book.class, collectionName);
                 }
-                return bookRecommendationsRepository;
+                return bookRecommendationsCollection;
 
             case StringConstants.WANT_TO_READ:
 
-                if (wantToReadBookRepository == null) {
-                    wantToReadBookRepository = new BookRepository<>(Book.class, collectionName);
+                if (wantToReadBookCollection == null) {
+                    wantToReadBookCollection = new BookRepository<>(Book.class, collectionName);
                 }
-                return wantToReadBookRepository;
+                return wantToReadBookCollection;
 
                 case StringConstants.READ_LIST:
-                    if (readBookRepository == null) {
-                        readBookRepository = new BookRepository<>(Book.class, collectionName);
+                    if (readBookCollection == null) {
+                        readBookCollection = new BookRepository<>(Book.class, collectionName);
                     }
-                    return readBookRepository;
+                    return readBookCollection;
                     default:
                         return null;
         }
     }
-
-
 }

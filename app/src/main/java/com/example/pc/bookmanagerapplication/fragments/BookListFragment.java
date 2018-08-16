@@ -11,20 +11,17 @@ import android.widget.ListView;
 
 import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.R;
-import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.StringConstants;
 import com.example.pc.bookmanagerapplication.activities.RecommendationsListActivity;
-import com.example.pc.bookmanagerapplication.StringConstants;
 import com.example.pc.bookmanagerapplication.activities.BookDetailsActivity;
-import com.example.pc.bookmanagerapplication.activities.RecommendationsListActivity;
-import com.example.pc.bookmanagerapplication.activities.models.Book;
+import com.example.pc.bookmanagerapplication.models.Book;
 import com.example.pc.bookmanagerapplication.repository.base.Repository;
 
 
 public class BookListFragment extends Fragment {
 
-    ArrayAdapter<Book> mAdatper;
-    Repository<Book> mBookCollection;
+    private ArrayAdapter<Book> mAdapter;
+    private Repository<Book> mBookCollection;
     private ListView mBookList;
 
     public BookListFragment() {
@@ -40,16 +37,16 @@ public class BookListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View mView =  inflater.inflate(R.layout.fragment_book_list, container, false);
-        mAdatper = new ArrayAdapter<Book>(getContext(), android.R.layout.simple_list_item_1);
+        mAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1);
 
         mBookList = mView.findViewById(R.id.lv_book_list);
 
-
         mBookList.setOnItemClickListener((adapterView, view, i, l) -> {
+
             Intent toBookDetails =
                     new Intent(getContext(), BookDetailsActivity.class);
 
-            Book book = mAdatper.getItem(i);
+            Book book = mAdapter.getItem(i);
             toBookDetails.putExtra(StringConstants.BOOK, book);
             toBookDetails.putExtra(StringConstants.COLLECTION_NAME, mBookCollection.getCollectionName());
             startActivity(toBookDetails);
@@ -63,35 +60,38 @@ public class BookListFragment extends Fragment {
         this.mBookCollection = BookManagerApp.getBookRepository(collectionName);
     }
 
-    public void setListAdapter(ArrayAdapter adapter){
-        mAdatper = adapter;
-        mBookList.setAdapter(adapter);
-    }
 
     @Override
     public void onStart() {
         super.onStart();
 
-        if (mBookCollection.getCollectionName().equals(StringConstants.RECOMMENDATIONS)) {
+        if (mBookCollection.getCollectionName()
+                .equals(StringConstants.RECOMMENDATIONS)) {
+
             mBookCollection.getAll(books -> {
 
                 for (Book book : books) {
-                    if (RecommendationsListActivity.mSelectedOptions.contains(book.genre)) {
-                        mAdatper.add(book);
+                    if (RecommendationsListActivity
+                            .mSelectedGenres
+                            .contains(book.genre)) {
+
+                        mAdapter.add(book);
+
                     }
                 }
-
             });
 
         } else {
             mBookCollection.getAll(books -> {
 
                 for (Book book : books) {
-                  mAdatper.add(book);
+                  mAdapter.add(book);
                 }
 
             });
         }
-        mBookList.setAdapter(mAdatper);
+
+        mBookList.setAdapter(mAdapter);
+
     }
 }

@@ -8,4 +8,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="remove">Remove</string>
+    <string name="choose_your_favourite_genres_of_literature">Choose your favourite genres of literature:</string>
+    <string name="fantasy">Fantasy</string>
+    <string name="classics">Classics</string>
+    <string name="horror">Horror</string>
+    <string name="novels">Novels</string>
+    <string name="mystery">Mystery</string>
+    <string name="science_fiction">Science-Fiction</string>
+    <string name="biographies">Biographies</string>
+    <string name="get_recommendations">Get Recommendations</string>
+    <string name="book_cover">Book cover</string>
 </resources>

@@ -12,7 +12,7 @@ public class WantToReadActivity extends AppCompatActivity {
 
     public static final long ID = 2;
     private DrawerFragment mDrawer;
-    private BookListFragment mListFragment;
+    private BookListFragment mBookListFragment;
 
 
     @Override
@@ -24,7 +24,7 @@ public class WantToReadActivity extends AppCompatActivity {
         mDrawer.setID(ID);
         setSupportActionBar(mDrawer.getToolbar());
 
-        mListFragment = BookListFragment.newInstance();
+        mBookListFragment = BookListFragment.newInstance();
 
         getFragmentManager()
                 .beginTransaction()
@@ -33,7 +33,7 @@ public class WantToReadActivity extends AppCompatActivity {
 
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.lv_book_list, mListFragment)
+                .replace(R.id.lv_book_list, mBookListFragment)
                 .commit();
 
     }
@@ -42,6 +42,6 @@ public class WantToReadActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mDrawer.setupDrawer();
-        mListFragment.setBookCollection(StringConstants.WANT_TO_READ);
+        mBookListFragment.setBookCollection(StringConstants.WANT_TO_READ);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.pc.bookmanagerapplication.fragments;
 
-import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,13 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pc.bookmanagerapplication.R;
-import com.example.pc.bookmanagerapplication.activities.models.Book;
+import com.example.pc.bookmanagerapplication.models.Book;
 import com.squareup.picasso.Picasso;
 
 
 public class BookOutlookFragment extends Fragment {
 
-    Book mBook;
+    private Book mCurrentBook;
 
     public BookOutlookFragment() {
         // Required empty public constructor
@@ -31,17 +30,19 @@ public class BookOutlookFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_book_outlook, container, false);
         ImageView imageView = view.findViewById(R.id.iv_book_cover);
 
-        Picasso.with(getContext()).load(mBook.url)
+        Picasso.with(getContext()).load(mCurrentBook.url)
                 .resize(400, 800)
                 .centerInside()
                 .into(imageView);
 
         TextView title = view.findViewById(R.id.tv_title);
-        title.setText(mBook.title);
+        title.setText(mCurrentBook.title);
+
         TextView author = view.findViewById(R.id.tv_author);
-        author.setText(mBook.author);
+        author.setText(mCurrentBook.author);
+
         TextView resume = view.findViewById(R.id.tv_resume);
-        resume.setText(mBook.resume);
+        resume.setText(mCurrentBook.resume);
 
         return view;
     }
@@ -51,6 +52,6 @@ public class BookOutlookFragment extends Fragment {
     }
 
     public void setBook(Book book) {
-        this.mBook = book;
+        this.mCurrentBook = book;
     }
 }

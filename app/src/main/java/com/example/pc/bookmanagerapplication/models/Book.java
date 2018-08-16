@@ -1,4 +1,4 @@
-package com.example.pc.bookmanagerapplication.activities.models;
+package com.example.pc.bookmanagerapplication.models;
 
 import java.io.Serializable;
 

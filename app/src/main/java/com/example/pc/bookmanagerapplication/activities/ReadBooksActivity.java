@@ -11,8 +11,8 @@ import com.example.pc.bookmanagerapplication.fragments.DrawerFragment;
 public class ReadBooksActivity extends AppCompatActivity {
 
     public static final long ID = 3;
-    DrawerFragment mDrawer;
-    BookListFragment mListFragment;
+    private DrawerFragment mDrawer;
+    private BookListFragment mBookListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +23,7 @@ public class ReadBooksActivity extends AppCompatActivity {
         mDrawer.setID(ID);
         setSupportActionBar(mDrawer.getToolbar());
 
-        mListFragment = BookListFragment.newInstance();
-
+        mBookListFragment = BookListFragment.newInstance();
 
         getFragmentManager()
                 .beginTransaction()
@@ -33,7 +32,7 @@ public class ReadBooksActivity extends AppCompatActivity {
 
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.lv_book_list, mListFragment)
+                .replace(R.id.lv_book_list, mBookListFragment)
                 .commit();
 
     }
@@ -42,6 +41,6 @@ public class ReadBooksActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mDrawer.setupDrawer();
-        mListFragment.setBookCollection(StringConstants.READ_LIST);
+        mBookListFragment.setBookCollection(StringConstants.READ_LIST);
     }
 }
