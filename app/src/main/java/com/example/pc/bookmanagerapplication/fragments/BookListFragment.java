@@ -10,19 +10,31 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.pc.bookmanagerapplication.BookManagerApp;
+import com.example.pc.bookmanagerapplication.CustomArrayAdapter;
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.StringConstants;
 import com.example.pc.bookmanagerapplication.activities.RecommendationsListActivity;
 import com.example.pc.bookmanagerapplication.activities.BookDetailsActivity;
 import com.example.pc.bookmanagerapplication.models.Book;
 import com.example.pc.bookmanagerapplication.repository.base.Repository;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Nullable;
 
 
 public class BookListFragment extends Fragment {
 
-    private ArrayAdapter<Book> mAdapter;
+    private CustomArrayAdapter mAdapter;
     private Repository<Book> mBookCollection;
     private ListView mBookList;
+    private List<Book> mBooks;
 
     public BookListFragment() {
 
@@ -37,7 +49,24 @@ public class BookListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View mView =  inflater.inflate(R.layout.fragment_book_list, container, false);
-        mAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1);
+
+        mBooks = new ArrayList<>();
+        mAdapter = new CustomArrayAdapter(getContext(), R.layout.custom_list_view, mBooks);
+
+        FirebaseFirestore mDb = FirebaseFirestore.getInstance();
+        mDb.collection(StringConstants.WANT_TO_READ).addSnapshotListener((queryDocumentSnapshots, e) -> {
+
+            for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
+
+                if (doc.getType() == DocumentChange.Type.ADDED) {
+
+                    Book book = doc.getDocument().toObject(Book.class);
+                    mBooks.add(book);
+
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+        });
 
         mBookList = mView.findViewById(R.id.lv_book_list);
 
@@ -46,7 +75,7 @@ public class BookListFragment extends Fragment {
             Intent toBookDetails =
                     new Intent(getContext(), BookDetailsActivity.class);
 
-            Book book = mAdapter.getItem(i);
+            Book book = (Book) mAdapter.getItem(i);
             toBookDetails.putExtra(StringConstants.BOOK, book);
             toBookDetails.putExtra(StringConstants.COLLECTION_NAME, mBookCollection.getCollectionName());
             startActivity(toBookDetails);
@@ -86,7 +115,6 @@ public class BookListFragment extends Fragment {
                 for (Book book : books) {
                   mAdapter.add(book);
                 }
-
             });
         }
 

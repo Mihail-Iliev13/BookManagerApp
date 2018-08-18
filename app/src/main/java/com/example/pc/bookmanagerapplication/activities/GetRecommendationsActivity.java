@@ -7,11 +7,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
+import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.StringConstants;
 import com.example.pc.bookmanagerapplication.fragments.DrawerFragment;
+import com.example.pc.bookmanagerapplication.models.Book;
+import com.example.pc.bookmanagerapplication.repository.BookRepository;
+import com.example.pc.bookmanagerapplication.repository.base.Repository;
 
 import java.util.HashSet;
+import java.util.List;
 
 
 public class GetRecommendationsActivity extends AppCompatActivity{

@@ -14,4 +14,5 @@ public interface Repository<T> {
     void remove (Book book);
 
     String getCollectionName();
+
 }
