@@ -35,6 +35,8 @@ public class BookListFragment extends Fragment {
     private Repository<Book> mBookCollection;
     private ListView mBookList;
     private List<Book> mBooks;
+    private Book mClickedBook;
+    private boolean mAlreadyStarted;
 
     public BookListFragment() {
 
@@ -49,24 +51,8 @@ public class BookListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View mView =  inflater.inflate(R.layout.fragment_book_list, container, false);
-
         mBooks = new ArrayList<>();
-        mAdapter = new CustomArrayAdapter(getContext(), R.layout.custom_list_view, mBooks);
-
-        FirebaseFirestore mDb = FirebaseFirestore.getInstance();
-        mDb.collection(StringConstants.WANT_TO_READ).addSnapshotListener((queryDocumentSnapshots, e) -> {
-
-            for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
-
-                if (doc.getType() == DocumentChange.Type.ADDED) {
-
-                    Book book = doc.getDocument().toObject(Book.class);
-                    mBooks.add(book);
-
-                    mAdapter.notifyDataSetChanged();
-                }
-            }
-        });
+        mAlreadyStarted = false;
 
         mBookList = mView.findViewById(R.id.lv_book_list);
 
@@ -75,8 +61,8 @@ public class BookListFragment extends Fragment {
             Intent toBookDetails =
                     new Intent(getContext(), BookDetailsActivity.class);
 
-            Book book = (Book) mAdapter.getItem(i);
-            toBookDetails.putExtra(StringConstants.BOOK, book);
+            mClickedBook= (Book) mAdapter.getItem(i);
+            toBookDetails.putExtra(StringConstants.BOOK, mClickedBook);
             toBookDetails.putExtra(StringConstants.COLLECTION_NAME, mBookCollection.getCollectionName());
             startActivity(toBookDetails);
         });
@@ -94,29 +80,65 @@ public class BookListFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+        if (mAlreadyStarted) {
+            mAdapter.remove(mClickedBook);
+            mAdapter.notifyDataSetChanged();
+            return;
+        }
+
+        mAlreadyStarted = true;
+
+        mAdapter = new CustomArrayAdapter(getContext(), R.layout.custom_list_view, mBooks);
+        FirebaseFirestore mDb = FirebaseFirestore.getInstance();
+
         if (mBookCollection.getCollectionName()
                 .equals(StringConstants.RECOMMENDATIONS)) {
 
-            mBookCollection.getAll(books -> {
+            mDb.collection(StringConstants.RECOMMENDATIONS).addSnapshotListener((queryDocumentSnapshots, e) -> {
 
-                for (Book book : books) {
-                    if (RecommendationsListActivity
-                            .mSelectedGenres
-                            .contains(book.genre)) {
+                for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
 
-                        mAdapter.add(book);
+                    if (doc.getType() != DocumentChange.Type.ADDED) {
+
+                        continue;
+
                     }
+
+                        Book book = doc.getDocument().toObject(Book.class);
+
+                        if (!RecommendationsListActivity
+                                .mSelectedGenres
+                                .contains(book.genre)) {
+
+                            continue;
+                        }
+
+                        mBooks.add(book);
+                        mAdapter.notifyDataSetChanged();
+
                 }
             });
 
         } else {
-            mBookCollection.getAll(books -> {
+            mDb.collection(mBookCollection.getCollectionName()).addSnapshotListener((queryDocumentSnapshots, e) -> {
 
-                for (Book book : books) {
-                  mAdapter.add(book);
+                for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
+
+                    if (doc.getType() != DocumentChange.Type.ADDED) {
+                        continue;
+                    }
+
+                        Book book = doc.getDocument().toObject(Book.class);
+
+
+                        mBooks.add(book);
+
+                        mAdapter.notifyDataSetChanged();
+
                 }
             });
         }
+
 
         mBookList.setAdapter(mAdapter);
 
