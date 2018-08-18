@@ -6,37 +6,31 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.CustomArrayAdapter;
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.StringConstants;
-import com.example.pc.bookmanagerapplication.activities.RecommendationsListActivity;
 import com.example.pc.bookmanagerapplication.activities.BookDetailsActivity;
 import com.example.pc.bookmanagerapplication.models.Book;
 import com.example.pc.bookmanagerapplication.repository.base.Repository;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 
 public class BookListFragment extends Fragment {
 
+    public static boolean shouldRemoveBookFromListView;
     private CustomArrayAdapter mAdapter;
     private Repository<Book> mBookCollection;
-    private ListView mBookList;
+    private ListView mBookListView;
     private List<Book> mBooks;
     private Book mClickedBook;
-    private boolean mAlreadyStarted;
+    private boolean mAlreadyCreated;
 
     public BookListFragment() {
 
@@ -52,19 +46,30 @@ public class BookListFragment extends Fragment {
 
         View mView =  inflater.inflate(R.layout.fragment_book_list, container, false);
         mBooks = new ArrayList<>();
-        mAlreadyStarted = false;
+        mAlreadyCreated = false;
 
-        mBookList = mView.findViewById(R.id.lv_book_list);
+        mBookListView = mView.findViewById(R.id.lv_book_list);
 
-        mBookList.setOnItemClickListener((adapterView, view, i, l) -> {
+        mBookListView.setOnItemClickListener((adapterView, view, i, l) -> {
 
             Intent toBookDetails =
                     new Intent(getContext(), BookDetailsActivity.class);
 
-            mClickedBook= (Book) mAdapter.getItem(i);
+            mClickedBook = (Book) mAdapter.getItem(i);
             toBookDetails.putExtra(StringConstants.BOOK, mClickedBook);
             toBookDetails.putExtra(StringConstants.COLLECTION_NAME, mBookCollection.getCollectionName());
             startActivity(toBookDetails);
+        });
+
+        mBookListView.setOnItemLongClickListener((parent, view, position, id) -> {
+
+            Toast.makeText(
+                    getContext(),
+                    "Genre: " + ((Book)mAdapter.getItem(position)).genre,
+                    Toast.LENGTH_SHORT)
+                    .show();
+
+            return true;
         });
 
         return mView;
@@ -75,72 +80,26 @@ public class BookListFragment extends Fragment {
         this.mBookCollection = BookManagerApp.getBookRepository(collectionName);
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
 
-        if (mAlreadyStarted) {
-            mAdapter.remove(mClickedBook);
-            mAdapter.notifyDataSetChanged();
+        if (mAlreadyCreated) {
+
+            if (shouldRemoveBookFromListView) {
+
+                mAdapter.remove(mClickedBook);
+                mAdapter.notifyDataSetChanged();
+            }
+
             return;
         }
 
-        mAlreadyStarted = true;
-
+        mAlreadyCreated = true;
         mAdapter = new CustomArrayAdapter(getContext(), R.layout.custom_list_view, mBooks);
-        FirebaseFirestore mDb = FirebaseFirestore.getInstance();
-
-        if (mBookCollection.getCollectionName()
-                .equals(StringConstants.RECOMMENDATIONS)) {
-
-            mDb.collection(StringConstants.RECOMMENDATIONS).addSnapshotListener((queryDocumentSnapshots, e) -> {
-
-                for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
-
-                    if (doc.getType() != DocumentChange.Type.ADDED) {
-
-                        continue;
-
-                    }
-
-                        Book book = doc.getDocument().toObject(Book.class);
-
-                        if (!RecommendationsListActivity
-                                .mSelectedGenres
-                                .contains(book.genre)) {
-
-                            continue;
-                        }
-
-                        mBooks.add(book);
-                        mAdapter.notifyDataSetChanged();
-
-                }
-            });
-
-        } else {
-            mDb.collection(mBookCollection.getCollectionName()).addSnapshotListener((queryDocumentSnapshots, e) -> {
-
-                for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
-
-                    if (doc.getType() != DocumentChange.Type.ADDED) {
-                        continue;
-                    }
-
-                        Book book = doc.getDocument().toObject(Book.class);
-
-
-                        mBooks.add(book);
-
-                        mAdapter.notifyDataSetChanged();
-
-                }
-            });
-        }
-
-
-        mBookList.setAdapter(mAdapter);
+        mBookCollection.toAdapter(mBooks, mAdapter);
+        mBookListView.setAdapter(mAdapter);
 
     }
+
 }

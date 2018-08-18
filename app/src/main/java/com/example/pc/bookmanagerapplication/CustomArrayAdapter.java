@@ -18,10 +18,12 @@ import java.util.List;
 public class CustomArrayAdapter extends ArrayAdapter{
 
     private int layout;
+    private List books;
 
     public CustomArrayAdapter(@NonNull Context context, int resource, @NonNull List objects) {
         super(context, resource, objects);
         layout = resource;
+        books = objects;
     }
 
     @NonNull

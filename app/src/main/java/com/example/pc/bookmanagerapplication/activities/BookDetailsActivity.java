@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.StringConstants;
+import com.example.pc.bookmanagerapplication.fragments.BookListFragment;
 import com.example.pc.bookmanagerapplication.models.Book;
 import com.example.pc.bookmanagerapplication.fragments.BookOutlookFragment;
 import com.example.pc.bookmanagerapplication.fragments.DrawerFragment;
@@ -20,11 +21,13 @@ import com.example.pc.bookmanagerapplication.fragments.AddRemoveButtonsFragment;
 
 public class BookDetailsActivity extends AppCompatActivity {
 
+    public static boolean isButtonClicked;
     private BookOutlookFragment mBookOutlook;
     private DrawerFragment mDrawer;
     private AddRemoveButtonsFragment mAddRemoveButton;
     private String mCollectionName;
     private Book mBook;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class BookDetailsActivity extends AppCompatActivity {
 
         } else {
             /*
-            if you came to this activity from ReadBooks activity
+            if current firestore collection name is Read list
             set a layout with only one button (Remove button)
              */
 
@@ -84,17 +87,29 @@ public class BookDetailsActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mDrawer.setupDrawer();
+        isButtonClicked = false;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if (isButtonClicked) {
+            BookListFragment.shouldRemoveBookFromListView = true;
+        } else {
+            BookListFragment.shouldRemoveBookFromListView = false;
+
+        }
+    }
 
     /*
-     This method removes the book from Read List
-     and puts it back to Recommendations
+         This method removes the book from Read List
+         and puts it back to Recommendations
 
-     The method is called only when you came to this activity
-     fom ReadBooks activity and the onclick listener is defined in
-     the layout - activity_one_button_book_details
-     */
+         The method is called only when you came to this activity
+         fom ReadBooks activity and the onclick listener is defined in
+         the layout - activity_one_button_book_details
+         */
     public void removeFromReadList(View view) {
         BookManagerApp.getBookRepository(StringConstants.READ_LIST)
                 .remove(mBook);
@@ -102,6 +117,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         BookManagerApp.getBookRepository(StringConstants.RECOMMENDATIONS)
                 .add(mBook);
 
+        isButtonClicked = true;
         Button button = view.findViewById(R.id.btn_remove);
         button.setVisibility(View.INVISIBLE);
         String message = String.format("%s has been removed from \"Read Books\" list", mBook.title);

@@ -27,7 +27,6 @@ public class BookListActivity extends AppCompatActivity {
 
         setSupportActionBar(mDrawer.getToolbar());
 
-
         mBookListFragment = BookListFragment.newInstance();
 
         getFragmentManager()

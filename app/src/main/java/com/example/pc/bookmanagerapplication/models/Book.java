@@ -15,7 +15,9 @@ public class Book implements Serializable {
         // public constructor is needed for Firebase parsing to work
     }
 
-    public Book (String title, String author, String genre, String resume, String url, String documentRef) {
+    public Book (String title, String author, String genre, String resume, String url,
+                 String documentRef) {
+
         this.title  = title;
         this.author = author;
         this.genre = genre;

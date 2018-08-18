@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.StringConstants;
+import com.example.pc.bookmanagerapplication.activities.BookDetailsActivity;
 import com.example.pc.bookmanagerapplication.models.Book;
 import com.example.pc.bookmanagerapplication.repository.base.Repository;
 
@@ -75,7 +76,6 @@ public class AddRemoveButtonsFragment extends Fragment {
         return view;
     }
 
-
     public static AddRemoveButtonsFragment newInstance() {
         return new AddRemoveButtonsFragment();
     }
@@ -117,7 +117,6 @@ public class AddRemoveButtonsFragment extends Fragment {
 
     }
 
-
     private void removeFromList(){
 
         Repository from = mBookCollection;
@@ -141,6 +140,8 @@ public class AddRemoveButtonsFragment extends Fragment {
 
         removeFrom.remove(mCurrentBook);
         addTo.add(mCurrentBook);
+
+        BookDetailsActivity.isButtonClicked = true;
 
         mFirstButton.setVisibility(View.INVISIBLE);
         mSecondButton.setVisibility(View.INVISIBLE);
