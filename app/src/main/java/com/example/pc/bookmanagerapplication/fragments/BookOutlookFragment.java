@@ -30,19 +30,19 @@ public class BookOutlookFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_book_outlook, container, false);
         ImageView imageView = view.findViewById(R.id.iv_book_cover);
 
-        Picasso.with(getContext()).load(mCurrentBook.url)
+        Picasso.with(getContext()).load(mCurrentBook.getBookCoverUrl())
                 .resize(300, 600)
                 .centerInside()
                 .into(imageView);
 
         TextView title = view.findViewById(R.id.tv_title);
-        title.setText(mCurrentBook.title);
+        title.setText(mCurrentBook.getTitle());
 
         TextView author = view.findViewById(R.id.tv_author);
-        author.setText(mCurrentBook.author);
+        author.setText(mCurrentBook.getAuthor());
 
         TextView resume = view.findViewById(R.id.tv_resume);
-        resume.setText(mCurrentBook.resume);
+        resume.setText(mCurrentBook.getResume());
 
         return view;
     }

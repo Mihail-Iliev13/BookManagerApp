@@ -65,7 +65,7 @@ public class BookListFragment extends Fragment {
 
             Toast.makeText(
                     getContext(),
-                    "Genre: " + ((Book)mAdapter.getItem(position)).genre,
+                    "Genre: " + ((Book)mAdapter.getItem(position)).getGenre(),
                     Toast.LENGTH_SHORT)
                     .show();
 

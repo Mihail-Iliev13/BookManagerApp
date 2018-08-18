@@ -101,7 +101,7 @@ public class AddRemoveButtonsFragment extends Fragment {
     private void showSuccessfullyAddedMessage(String listName) {
 
         String message = String.format("\"%s\" has been successfully added to \"%s\" list",
-                mCurrentBook.title, listName);
+                mCurrentBook.getTitle(), listName);
 
         showToast(message);
     }
@@ -126,7 +126,7 @@ public class AddRemoveButtonsFragment extends Fragment {
         transferBook(from, to);
 
         String message = String.format("\"%s\" has been removed from Want to read list",
-                mCurrentBook.title);
+                mCurrentBook.getTitle());
 
         showToast(message);
     }

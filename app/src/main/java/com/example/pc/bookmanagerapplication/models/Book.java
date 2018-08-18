@@ -32,4 +32,24 @@ public class Book implements Serializable {
         builder.append("\"").append(title).append("\"").append(" by ").append(author);
         return builder.toString();
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public String getBookCoverUrl(){
+        return url;
+    }
+
+    public String getResume() {
+        return resume;
+    }
 }

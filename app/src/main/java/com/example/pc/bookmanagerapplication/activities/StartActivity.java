@@ -17,12 +17,9 @@ public class StartActivity extends AppCompatActivity {
 
         CircleWithTextView circleWithTextView = findViewById(R.id.cwt_circle);
 
-        circleWithTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StartActivity.this, GetRecommendationsActivity.class);
-                startActivity(intent);
-            }
+        circleWithTextView.setOnClickListener(v -> {
+            Intent intent = new Intent(StartActivity.this, GetRecommendationsActivity.class);
+            startActivity(intent);
         });
 
     }

@@ -18,26 +18,24 @@ import java.util.List;
 public class CustomArrayAdapter extends ArrayAdapter{
 
     private int layout;
-    private List books;
 
     public CustomArrayAdapter(@NonNull Context context, int resource, @NonNull List objects) {
         super(context, resource, objects);
         layout = resource;
-        books = objects;
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        ViewHolder mainViewHolder = null;
+        ViewHolder mainViewHolder;
 
         if (convertView == null) {
 
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(layout, parent, false);
             ViewHolder viewHolder = new ViewHolder();
-            viewHolder.bookCover = (ImageView) convertView.findViewById(R.id.iv_book_cover);
-            viewHolder.bookTitle = (TextView) convertView.findViewById(R.id.tv_book_title);
+            viewHolder.bookCover = convertView.findViewById(R.id.iv_book_cover);
+            viewHolder.bookTitle = convertView.findViewById(R.id.tv_book_title);
 
             Picasso.with(getContext()).load(((Book)getItem(position)).url)
                     .resize(150, 300)
@@ -52,7 +50,7 @@ public class CustomArrayAdapter extends ArrayAdapter{
 
             mainViewHolder = (ViewHolder) convertView.getTag();
 
-            Picasso.with(getContext()).load(((Book)getItem(position)).url)
+            Picasso.with(getContext()).load(((Book)getItem(position)).getBookCoverUrl())
                     .resize(150, 300)
                     .centerInside()
                     .into(mainViewHolder.bookCover);

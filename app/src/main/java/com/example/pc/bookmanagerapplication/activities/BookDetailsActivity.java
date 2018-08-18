@@ -98,7 +98,6 @@ public class BookDetailsActivity extends AppCompatActivity {
             BookListFragment.shouldRemoveBookFromListView = true;
         } else {
             BookListFragment.shouldRemoveBookFromListView = false;
-
         }
     }
 
@@ -120,7 +119,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         isButtonClicked = true;
         Button button = view.findViewById(R.id.btn_remove);
         button.setVisibility(View.INVISIBLE);
-        String message = String.format("%s has been removed from \"Read Books\" list", mBook.title);
+        String message = String.format("%s has been removed from \"Read Books\" list", mBook.getTitle());
         showToast(message);
 
     }
