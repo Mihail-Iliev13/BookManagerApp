@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.GetRecommendationsActivity">
+        <activity android:name=".activities.StartActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,6 +20,7 @@
         <activity android:name=".activities.BookListActivity" />
         <activity android:name=".activities.RecommendationsListActivity" />
         <activity android:name=".activities.BookDetailsActivity" />
+        <activity android:name=".activities.GetRecommendationsActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"
