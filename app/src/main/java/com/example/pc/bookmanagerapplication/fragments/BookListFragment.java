@@ -7,13 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pc.bookmanagerapplication.BookManagerApp;
-import com.example.pc.bookmanagerapplication.CustomArrayAdapter;
+import com.example.pc.bookmanagerapplication.utillities.BookManagerApp;
+import com.example.pc.bookmanagerapplication.utillities.CustomArrayAdapter;
 import com.example.pc.bookmanagerapplication.R;
-import com.example.pc.bookmanagerapplication.StringConstants;
+import com.example.pc.bookmanagerapplication.utillities.StringConstants;
 import com.example.pc.bookmanagerapplication.activities.BookDetailsActivity;
 import com.example.pc.bookmanagerapplication.models.Book;
 import com.example.pc.bookmanagerapplication.repository.base.Repository;

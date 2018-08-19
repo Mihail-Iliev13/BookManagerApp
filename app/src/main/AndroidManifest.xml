@@ -3,7 +3,7 @@
     package="com.example.pc.bookmanagerapplication">
 
     <application
-        android:name=".BookManagerApp"
+        android:name=".utillities.BookManagerApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

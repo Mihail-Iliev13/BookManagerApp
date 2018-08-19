@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.pc.bookmanagerapplication.R;
-import com.example.pc.bookmanagerapplication.StringConstants;
+import com.example.pc.bookmanagerapplication.utillities.StringConstants;
 import com.example.pc.bookmanagerapplication.activities.GetRecommendationsActivity;
 import com.example.pc.bookmanagerapplication.activities.BookListActivity;
 import com.mikepenz.materialdrawer.Drawer;

@@ -11,6 +11,10 @@ import android.view.View;
 public class CircleWithTextView extends View {
 
     Paint mPaint;
+    public float mCircleX;
+    public float mCircleY;
+    public int mCircleRadius;
+
 
     public CircleWithTextView(Context context) {
         super(context);
@@ -31,13 +35,14 @@ public class CircleWithTextView extends View {
         mPaint = new Paint();
     }
 
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        int x = this.getWidth()/2;
-        int y = this.getHeight()/2;
-        int radius = 200;
+        mCircleX = this.getWidth()/2;
+        mCircleY = this.getHeight()/2;
+        mCircleRadius = 300;
 
         mPaint.setColor(Color.WHITE);
         mPaint.setStyle(Paint.Style.FILL);
@@ -45,14 +50,15 @@ public class CircleWithTextView extends View {
         canvas.drawPaint(mPaint);
 
         mPaint.setColor(Color.parseColor("#33b5e5"));
-        canvas.drawCircle(x, y, radius, mPaint);
+        canvas.drawCircle(mCircleX, mCircleY, mCircleRadius, mPaint);
 
         mPaint.setColor(Color.WHITE);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setTextAlign(Paint.Align.CENTER);
-        mPaint.setTextSize(45);
+        mPaint.setTextSize(60);
 
         canvas.drawText("Tap this circle",getWidth()/2, getHeight()/2 - 25, mPaint);
         canvas.drawText("to start the App",getWidth()/2, getHeight()/2 + 25, mPaint);
     }
+
 }

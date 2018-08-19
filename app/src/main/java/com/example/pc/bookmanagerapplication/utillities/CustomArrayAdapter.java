@@ -1,4 +1,4 @@
-package com.example.pc.bookmanagerapplication;
+package com.example.pc.bookmanagerapplication.utillities;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.models.Book;
 import com.squareup.picasso.Picasso;
 

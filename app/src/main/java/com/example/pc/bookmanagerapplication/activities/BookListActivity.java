@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.pc.bookmanagerapplication.R;
-import com.example.pc.bookmanagerapplication.StringConstants;
+import com.example.pc.bookmanagerapplication.utillities.StringConstants;
 import com.example.pc.bookmanagerapplication.fragments.BookListFragment;
 import com.example.pc.bookmanagerapplication.fragments.DrawerFragment;
 
@@ -13,7 +13,6 @@ public class BookListActivity extends AppCompatActivity {
 
     private DrawerFragment mDrawer;
     private BookListFragment mBookListFragment;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,6 @@ public class BookListActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.lv_book_list, mBookListFragment)
                 .commit();
-
     }
 
     @Override
