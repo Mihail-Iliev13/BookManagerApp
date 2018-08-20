@@ -56,12 +56,13 @@ public class BookRepository<T> implements Repository<T> {
                                 continue;
                             }
 
-                            Book book = doc.getDocument().toObject(Book.class);
+                            Book book = doc.getDocument()
+                                    .toObject(Book.class);
 
                             if (mCollectionName.equals(StringConstants.RECOMMENDATIONS)){
                                 if (!RecommendationsListActivity
                                         .mSelectedGenres
-                                        .contains(book.genre)) {
+                                        .contains(book.getGenre())) {
                                     continue;
                                 }
                             }

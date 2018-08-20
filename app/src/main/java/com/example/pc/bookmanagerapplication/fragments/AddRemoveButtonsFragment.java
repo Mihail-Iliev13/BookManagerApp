@@ -146,6 +146,7 @@ public class AddRemoveButtonsFragment extends Fragment {
     }
 
     private void showToast(String message) {
+
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View layout = inflater.inflate(R.layout.custom_toast_layout,
                 (ViewGroup)getActivity().findViewById(R.id.ll_toast_root));
