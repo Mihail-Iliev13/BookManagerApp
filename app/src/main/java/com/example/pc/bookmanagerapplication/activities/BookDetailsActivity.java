@@ -43,7 +43,16 @@ public class BookDetailsActivity extends AppCompatActivity {
                 .getStringExtra(StringConstants.COLLECTION_NAME);
 
 
-        if (!mCollectionName.equals(StringConstants.READ_LIST)) {
+        if (mCollectionName.equals(StringConstants.READ_LIST)) {
+
+             /*
+            if current firestore collection name is Read list
+            set a layout with only one button (Remove button)
+             */
+
+            setContentView(R.layout.activity_one_button_book_details);
+
+        } else {
 
             mAddRemoveButton = AddRemoveButtonsFragment.newInstance();
             mAddRemoveButton.setCurrentBook(mBook);
@@ -53,23 +62,12 @@ public class BookDetailsActivity extends AppCompatActivity {
                     .beginTransaction()
                     .replace(R.id.replacing_button, mAddRemoveButton)
                     .commit();
-
-
-        } else {
-            /*
-            if current firestore collection name is Read list
-            set a layout with only one button (Remove button)
-             */
-
-            setContentView(R.layout.activity_one_button_book_details);
         }
 
         mBookOutlook = BookOutlookFragment.newInstance();
         mBookOutlook.setBook(mBook);
 
         mDrawer = DrawerFragment.newInstance();
-        mDrawer.setID(-1);
-
 
         getFragmentManager()
                 .beginTransaction()

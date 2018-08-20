@@ -1,4 +1,4 @@
-package com.example.pc.bookmanagerapplication.models;
+package com.example.pc.bookmanagerapplication.customviews;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -11,9 +11,9 @@ import android.view.View;
 public class CircleWithTextView extends View {
 
     Paint mPaint;
-    public float mCircleX;
-    public float mCircleY;
-    public int mCircleRadius;
+    private float mCircleX;
+    private float mCircleY;
+    private int mCircleRadius;
 
 
     public CircleWithTextView(Context context) {
@@ -35,6 +35,17 @@ public class CircleWithTextView extends View {
         mPaint = new Paint();
     }
 
+    public float getCircleX() {
+        return mCircleX;
+    }
+
+    public float getCircleY() {
+        return mCircleY;
+    }
+
+    public int getCircleRadius() {
+        return mCircleRadius;
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {

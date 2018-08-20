@@ -5,14 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
 
 import com.example.pc.bookmanagerapplication.R;
-import com.example.pc.bookmanagerapplication.models.CircleWithTextView;
+import com.example.pc.bookmanagerapplication.customviews.CircleWithTextView;
 
 public class StartActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
 
-    CircleWithTextView mCircleWithTextView;
+    CircleWithTextView mCircle;
     GestureDetector mDetector;
 
     @Override
@@ -20,7 +19,7 @@ public class StartActivity extends AppCompatActivity implements GestureDetector.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        mCircleWithTextView = findViewById(R.id.cwt_circle);
+        mCircle = findViewById(R.id.cwt_circle);
         mDetector = new GestureDetector(this, this);
 
     }
@@ -35,16 +34,17 @@ public class StartActivity extends AppCompatActivity implements GestureDetector.
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-                double deltaX = Math.pow(mCircleWithTextView.mCircleX - touchX, 2);
-                double deltaY = Math.pow(mCircleWithTextView.mCircleY - touchY, 2);
+                double deltaX = Math.pow(mCircle.getCircleX() - touchX, 2);
+                double deltaY = Math.pow(mCircle.getCircleY() - touchY, 2);
 
-                if (deltaX + deltaY < Math.pow(mCircleWithTextView.mCircleRadius, 2)) {
+                if (deltaX + deltaY < Math.pow(mCircle.getCircleRadius(), 2)) {
 
                     Intent intent = new Intent(this, GetRecommendationsActivity.class);
                     startActivity(intent);
                     finish();
                     return true;
                 }
+
                 return value;
             }
         return value;

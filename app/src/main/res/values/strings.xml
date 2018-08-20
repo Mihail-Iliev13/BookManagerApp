@@ -12,10 +12,10 @@
     <string name="fantasy">Fantasy</string>
     <string name="classics">Classics</string>
     <string name="horror">Horror</string>
-    <string name="novels">Novels</string>
+    <string name="novels">Modern Novels</string>
     <string name="mystery">Mystery</string>
     <string name="science_fiction">Science-Fiction</string>
-    <string name="biographies">Biographies</string>
+    <string name="biographies">Biography</string>
     <string name="get_recommendations">Get Recommendations</string>
     <string name="book_cover">Book cover</string>
     <string name="smiling_face">smiling face</string>

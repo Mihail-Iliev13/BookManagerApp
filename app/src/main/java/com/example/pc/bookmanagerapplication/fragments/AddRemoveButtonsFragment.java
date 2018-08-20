@@ -123,7 +123,7 @@ public class AddRemoveButtonsFragment extends Fragment {
 
         transferBook(from, to);
 
-        String message = String.format("\"%s\" has been removed from Want to read list",
+        String message = String.format("\"%s\" has been removed from \"Want to read\" list",
                 mCurrentBook.getTitle());
 
         showToast(message);

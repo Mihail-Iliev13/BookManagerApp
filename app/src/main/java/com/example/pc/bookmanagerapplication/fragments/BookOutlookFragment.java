@@ -31,7 +31,7 @@ public class BookOutlookFragment extends Fragment {
         ImageView imageView = view.findViewById(R.id.iv_book_cover);
 
         Picasso.with(getContext()).load(mCurrentBook.getBookCoverUrl())
-                .resize(400, 800)
+                .resize(300, 600)
                 .centerInside()
                 .into(imageView);
 
