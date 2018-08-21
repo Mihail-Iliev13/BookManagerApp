@@ -18,12 +18,13 @@ import com.example.pc.bookmanagerapplication.utillities.ToastShower;
 
 public class BookDetailsActivity extends AppCompatActivity {
 
-    public static boolean isButtonClicked;
+    private BookListFragment mBookListFragment;
     private BookOutlookFragment mBookOutlook;
     private DrawerFragment mDrawer;
     private AddRemoveButtonsFragment mAddRemoveButton;
     private String mCollectionName;
     private Book mBook;
+    private boolean mIsButtonClicked;
 
 
     @Override
@@ -82,18 +83,14 @@ public class BookDetailsActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mDrawer.setupDrawer();
-        isButtonClicked = false;
     }
+
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
 
-        if (isButtonClicked) {
-            BookListFragment.shouldRemoveBookFromListView = true;
-        } else {
-            BookListFragment.shouldRemoveBookFromListView = false;
-        }
+        BookListFragment.setShouldRemoveBookFromList(isButtonClicked());
     }
 
     /*
@@ -111,11 +108,20 @@ public class BookDetailsActivity extends AppCompatActivity {
         BookManagerApp.getBookRecommendationsCollection()
                 .add(mBook);
 
-        isButtonClicked = true;
+        mIsButtonClicked = true;
         Button button = view.findViewById(R.id.btn_remove);
         button.setVisibility(View.INVISIBLE);
         String message = String.format("%s has been removed from \"Read Books\" list", mBook.getTitle());
         ToastShower.showToastMessage(message, this);
-
     }
+
+    private boolean isButtonClicked() {
+
+        if (!mCollectionName.equals(StringConstants.READ_BOOKS)) {
+            mIsButtonClicked = mAddRemoveButton.isButtonCLicked();
+        }
+
+        return mIsButtonClicked;
+    }
+
 }

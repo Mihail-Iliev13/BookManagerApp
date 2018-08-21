@@ -1,4 +1,4 @@
-package com.example.pc.bookmanagerapplication.customviews;
+package com.example.pc.bookmanagerapplication.customviews.circlewithtext;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,13 +9,14 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class CircleWithTextView extends View {
+import com.example.pc.bookmanagerapplication.customviews.circlewithtext.base.Touchable;
+
+public class CircleWithTextView extends View implements Touchable{
 
     Paint mPaint;
     private float mCircleX;
     private float mCircleY;
     private int mCircleRadius;
-
 
     public CircleWithTextView(Context context) {
         super(context);
@@ -73,4 +74,14 @@ public class CircleWithTextView extends View {
         canvas.drawText("to start the App",getWidth()/2, getHeight()/2 + 25, mPaint);
     }
 
+    @Override
+   public boolean isTouched(MotionEvent event){
+
+       float touchX = event.getX();
+       float touchY = event.getY();
+       double deltaX = Math.pow(mCircleX - touchX, 2);
+       double deltaY = Math.pow(mCircleY - touchY, 2);
+
+       return deltaX + deltaY < Math.pow(mCircleRadius, 2);
+   }
 }

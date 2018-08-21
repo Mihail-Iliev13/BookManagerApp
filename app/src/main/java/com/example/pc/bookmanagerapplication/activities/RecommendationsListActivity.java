@@ -29,8 +29,6 @@ public class RecommendationsListActivity extends AppCompatActivity {
 
         mProgressDialog = new ProgressDialog(this);
 
-
-
         Intent intent = getIntent();
         mSelectedGenres = (HashSet<String>) intent.getSerializableExtra(StringConstants.SELECTED_GENRES);
         mListFragment = BookListFragment.newInstance();

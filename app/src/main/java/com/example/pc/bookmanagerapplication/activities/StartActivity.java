@@ -7,7 +7,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.example.pc.bookmanagerapplication.R;
-import com.example.pc.bookmanagerapplication.customviews.CircleWithTextView;
+import com.example.pc.bookmanagerapplication.customviews.circlewithtext.CircleWithTextView;
 
 public class StartActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
 
@@ -32,7 +32,7 @@ public class StartActivity extends AppCompatActivity implements GestureDetector.
     @Override
     public boolean onDown(MotionEvent e) {
 
-        if (isCircleTouched(e, mCircle)) {
+        if (mCircle.isTouched(e)) {
             goToGetRecommendationsActivity();
         }
 
@@ -77,16 +77,6 @@ public class StartActivity extends AppCompatActivity implements GestureDetector.
         return true;
     }
 
-    private boolean isCircleTouched(MotionEvent event, CircleWithTextView circle) {
-
-        float touchX = event.getX();
-        float touchY = event.getY();
-        double deltaX = Math.pow(circle.getCircleX() - touchX, 2);
-        double deltaY = Math.pow(circle.getCircleY() - touchY, 2);
-
-        return deltaX + deltaY < Math.pow(circle.getCircleRadius(), 2);
-
-    }
 
     private void goToGetRecommendationsActivity(){
         Intent intent = new Intent(StartActivity.this, GetRecommendationsActivity.class);

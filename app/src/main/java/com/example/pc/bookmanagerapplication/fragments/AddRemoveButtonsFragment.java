@@ -10,7 +10,6 @@ import android.widget.Button;
 import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.utillities.StringConstants;
-import com.example.pc.bookmanagerapplication.activities.BookDetailsActivity;
 import com.example.pc.bookmanagerapplication.models.Book;
 import com.example.pc.bookmanagerapplication.repository.base.Repository;
 import com.example.pc.bookmanagerapplication.utillities.ToastShower;
@@ -22,6 +21,7 @@ public class AddRemoveButtonsFragment extends Fragment {
     private Repository<Book> mBookCollection;
     private Button mFirstButton;
     private Button mSecondButton;
+    private boolean isButtonClicked;
 
     public AddRemoveButtonsFragment() {
         // Required empty public constructor
@@ -49,8 +49,8 @@ public class AddRemoveButtonsFragment extends Fragment {
 
         }
 
-
         mFirstButton.setOnClickListener(view1 -> {
+            isButtonClicked = true;
             String buttonText = String.valueOf(mFirstButton.getText());
 
             if (buttonText.equals(StringConstants.WANT_TO_READ)) {
@@ -61,6 +61,7 @@ public class AddRemoveButtonsFragment extends Fragment {
         });
 
         mSecondButton.setOnClickListener(view12 -> {
+            isButtonClicked = true;
             String textString = String.valueOf(mSecondButton.getText());
 
             if (textString.equals(StringConstants.MARK_AS_READ)) {
@@ -99,6 +100,7 @@ public class AddRemoveButtonsFragment extends Fragment {
     }
 
     private void addToWantToReadList() {
+
         Repository from = mBookCollection;
         Repository to = BookManagerApp.getWantToReadCollection();
 
@@ -146,9 +148,12 @@ public class AddRemoveButtonsFragment extends Fragment {
         removeFrom.remove(mCurrentBook);
         addTo.add(mCurrentBook);
 
-        BookDetailsActivity.isButtonClicked = true;
-
         mFirstButton.setVisibility(View.INVISIBLE);
         mSecondButton.setVisibility(View.INVISIBLE);
     }
+
+    public boolean isButtonCLicked() {
+      return isButtonClicked;
+    }
+
 }

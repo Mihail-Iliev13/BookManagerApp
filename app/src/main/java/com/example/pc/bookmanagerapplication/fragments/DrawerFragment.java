@@ -2,6 +2,7 @@ package com.example.pc.bookmanagerapplication.fragments;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +14,8 @@ import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.utillities.StringConstants;
 import com.example.pc.bookmanagerapplication.activities.GetRecommendationsActivity;
 import com.example.pc.bookmanagerapplication.activities.BookListActivity;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -62,9 +65,15 @@ public class DrawerFragment extends Fragment {
                 .withName(R.string.read_books)
                 .withIcon(R.drawable.ic_check_circle_black_24dp);
 
+        AccountHeader accountHeader = new AccountHeaderBuilder()
+                .withActivity(getActivity())
+                .withHeaderBackground(R.color.colorLightBlue)
+                .build();
+
         Drawer result = new DrawerBuilder()
                 .withActivity(getActivity())
                 .withToolbar(mToolbar)
+                .withAccountHeader(accountHeader)
                 .addDrawerItems(
                         toReadList,
                         new DividerDrawerItem(),

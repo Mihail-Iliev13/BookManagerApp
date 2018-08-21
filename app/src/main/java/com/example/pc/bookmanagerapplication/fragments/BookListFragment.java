@@ -17,19 +17,20 @@ import com.example.pc.bookmanagerapplication.models.Book;
 import com.example.pc.bookmanagerapplication.repository.base.Repository;
 import com.example.pc.bookmanagerapplication.utillities.ToastShower;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class BookListFragment extends Fragment {
+public class BookListFragment extends Fragment implements Serializable{
 
-    public static boolean shouldRemoveBookFromListView;
     private CustomArrayAdapter mAdapter;
     private Repository<Book> mBookCollection;
     private ListView mBookListView;
     private List<Book> mBooks;
     private Book mClickedBook;
     private boolean mAlreadyCreated;
+    private static boolean mShouldRemoveBookFromList;
 
     public BookListFragment() {
 
@@ -39,12 +40,18 @@ public class BookListFragment extends Fragment {
         return new BookListFragment();
     }
 
+    public static void setShouldRemoveBookFromList(boolean shouldRemove) {
+        mShouldRemoveBookFromList = shouldRemove;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View mView =  inflater.inflate(R.layout.fragment_book_list, container, false);
         mBooks = new ArrayList<>();
+        mAdapter = new CustomArrayAdapter(getContext(), R.layout.custom_list_view, mBooks);
+
         mAlreadyCreated = false;
 
         mBookListView = mView.findViewById(R.id.lv_book_list);
@@ -53,6 +60,7 @@ public class BookListFragment extends Fragment {
 
             Intent toBookDetails =
                     new Intent(getContext(), BookDetailsActivity.class);
+
 
             mClickedBook = (Book) mAdapter.getItem(i);
             toBookDetails.putExtra(StringConstants.BOOK, mClickedBook);
@@ -93,7 +101,7 @@ public class BookListFragment extends Fragment {
 
         if (mAlreadyCreated) {
 
-            if (shouldRemoveBookFromListView) {
+            if (mShouldRemoveBookFromList) {
 
                 mAdapter.remove(mClickedBook);
                 mAdapter.notifyDataSetChanged();
@@ -103,10 +111,8 @@ public class BookListFragment extends Fragment {
         }
 
         mAlreadyCreated = true;
-        mAdapter = new CustomArrayAdapter(getContext(), R.layout.custom_list_view, mBooks);
         mBookCollection.collectionToAdapter(mBooks, mAdapter);
         mBookListView.setAdapter(mAdapter);
 
     }
-
 }
