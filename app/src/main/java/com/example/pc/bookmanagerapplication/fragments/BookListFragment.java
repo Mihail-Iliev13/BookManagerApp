@@ -7,15 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.pc.bookmanagerapplication.utillities.BookManagerApp;
+import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.utillities.CustomArrayAdapter;
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.utillities.StringConstants;
 import com.example.pc.bookmanagerapplication.activities.BookDetailsActivity;
 import com.example.pc.bookmanagerapplication.models.Book;
 import com.example.pc.bookmanagerapplication.repository.base.Repository;
+import com.example.pc.bookmanagerapplication.utillities.ToastShower;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,11 +62,7 @@ public class BookListFragment extends Fragment {
 
         mBookListView.setOnItemLongClickListener((parent, view, position, id) -> {
 
-            Toast.makeText(
-                    getContext(),
-                    "Genre: " + ((Book)mAdapter.getItem(position)).getGenre(),
-                    Toast.LENGTH_SHORT)
-                    .show();
+            ToastShower.showBookGenre((Book)mAdapter.getItem(position), getContext());
 
             return true;
         });
@@ -76,7 +72,19 @@ public class BookListFragment extends Fragment {
 
 
     public void setBookCollection(String collectionName) {
-        this.mBookCollection = BookManagerApp.getBookRepository(collectionName);
+        switch (collectionName) {
+            case StringConstants.RECOMMENDATIONS:
+                mBookCollection = BookManagerApp.getBookRecommendationsCollection();
+                return;
+            case StringConstants.READ_LIST:
+                mBookCollection = BookManagerApp.getReadBooksCollection();
+                return;
+            case StringConstants.WANT_TO_READ:
+                mBookCollection = BookManagerApp.getWantToReadCollection();
+                return;
+            default:
+                return;
+        }
     }
 
     @Override

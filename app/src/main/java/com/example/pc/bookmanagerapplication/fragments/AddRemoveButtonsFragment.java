@@ -6,15 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.pc.bookmanagerapplication.utillities.BookManagerApp;
+import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.utillities.StringConstants;
 import com.example.pc.bookmanagerapplication.activities.BookDetailsActivity;
 import com.example.pc.bookmanagerapplication.models.Book;
 import com.example.pc.bookmanagerapplication.repository.base.Repository;
+import com.example.pc.bookmanagerapplication.utillities.ToastShower;
 
 
 public class AddRemoveButtonsFragment extends Fragment {
@@ -83,50 +82,58 @@ public class AddRemoveButtonsFragment extends Fragment {
     }
 
     public void setBookCollection(String collectionName) {
-        mBookCollection = BookManagerApp.getBookRepository(collectionName);
+
+        switch (collectionName) {
+            case StringConstants.RECOMMENDATIONS:
+                mBookCollection = BookManagerApp.getBookRecommendationsCollection();
+                return;
+            case StringConstants.READ_LIST:
+                mBookCollection = BookManagerApp.getReadBooksCollection();
+                return;
+            case StringConstants.WANT_TO_READ:
+                mBookCollection = BookManagerApp.getWantToReadCollection();
+                return;
+                default:
+                    return;
+        }
     }
 
     private void addToWantToReadList() {
         Repository from = mBookCollection;
-        Repository to = BookManagerApp.getBookRepository(StringConstants.WANT_TO_READ);
+        Repository to = BookManagerApp.getWantToReadCollection();
 
         transferBook(from, to);
 
-        showSuccessfullyAddedMessage(StringConstants.WANT_TO_READ);
+        ToastShower.showSuccessfullyAddedMessage(StringConstants.WANT_TO_READ,
+                mCurrentBook,
+                getActivity());
 
-    }
-
-    private void showSuccessfullyAddedMessage(String listName) {
-
-        String message = String.format("\"%s\" has been successfully added to \"%s\" list",
-                mCurrentBook.getTitle(), listName);
-
-        showToast(message);
     }
 
     private void markAsRead(){
 
         Repository from = mBookCollection;
-        Repository to = BookManagerApp.getBookRepository(StringConstants.READ_LIST);;
+        Repository to = BookManagerApp.getReadBooksCollection();;
 
         transferBook(from, to);
 
-        showSuccessfullyAddedMessage(StringConstants.READ_BOOKS);
-
+        ToastShower.showSuccessfullyAddedMessage(StringConstants.READ_BOOKS,
+                mCurrentBook,
+                getActivity());
     }
 
     private void removeFromList(){
 
         Repository from = mBookCollection;
         Repository to =  BookManagerApp
-                .getBookRepository(StringConstants.RECOMMENDATIONS);
+                .getBookRecommendationsCollection();
 
         transferBook(from, to);
 
         String message = String.format("\"%s\" has been removed from \"Want to read\" list",
                 mCurrentBook.getTitle());
 
-        showToast(message);
+        ToastShower.showToastMessage(message, getActivity());
     }
 
     private void setButtonsText(String first, String second ){
@@ -143,20 +150,5 @@ public class AddRemoveButtonsFragment extends Fragment {
 
         mFirstButton.setVisibility(View.INVISIBLE);
         mSecondButton.setVisibility(View.INVISIBLE);
-    }
-
-    private void showToast(String message) {
-
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View layout = inflater.inflate(R.layout.custom_toast_layout,
-                (ViewGroup)getActivity().findViewById(R.id.ll_toast_root));
-
-        layout.findViewById(R.id.tv_toast_message);
-        TextView tv = layout.findViewById(R.id.tv_toast_message);
-        tv.setText(message);
-        Toast toast = new Toast(getContext());
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
-        toast.show();
     }
 }

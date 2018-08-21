@@ -3,14 +3,10 @@ package com.example.pc.bookmanagerapplication.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.pc.bookmanagerapplication.utillities.BookManagerApp;
+import com.example.pc.bookmanagerapplication.BookManagerApp;
 import com.example.pc.bookmanagerapplication.R;
 import com.example.pc.bookmanagerapplication.utillities.StringConstants;
 import com.example.pc.bookmanagerapplication.fragments.BookListFragment;
@@ -18,6 +14,7 @@ import com.example.pc.bookmanagerapplication.models.Book;
 import com.example.pc.bookmanagerapplication.fragments.BookOutlookFragment;
 import com.example.pc.bookmanagerapplication.fragments.DrawerFragment;
 import com.example.pc.bookmanagerapplication.fragments.AddRemoveButtonsFragment;
+import com.example.pc.bookmanagerapplication.utillities.ToastShower;
 
 public class BookDetailsActivity extends AppCompatActivity {
 
@@ -43,7 +40,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                 .getStringExtra(StringConstants.COLLECTION_NAME);
 
 
-        if (mCollectionName.equals(StringConstants.READ_LIST)) {
+        if (mCollectionName.equals(StringConstants.READ_BOOKS)) {
 
              /*
             if current firestore collection name is Read list
@@ -108,31 +105,17 @@ public class BookDetailsActivity extends AppCompatActivity {
          the layout - activity_one_button_book_details
          */
     public void removeFromReadList(View view) {
-        BookManagerApp.getBookRepository(StringConstants.READ_LIST)
+        BookManagerApp.getReadBooksCollection()
                 .remove(mBook);
 
-        BookManagerApp.getBookRepository(StringConstants.RECOMMENDATIONS)
+        BookManagerApp.getBookRecommendationsCollection()
                 .add(mBook);
 
         isButtonClicked = true;
         Button button = view.findViewById(R.id.btn_remove);
         button.setVisibility(View.INVISIBLE);
         String message = String.format("%s has been removed from \"Read Books\" list", mBook.getTitle());
-        showToast(message);
+        ToastShower.showToastMessage(message, this);
 
-    }
-
-    public void showToast (String message) {
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.custom_toast_layout,
-                (ViewGroup)findViewById(R.id.ll_toast_root));
-
-        layout.findViewById(R.id.tv_toast_message);
-        TextView tv = layout.findViewById(R.id.tv_toast_message);
-        tv.setText(message);
-        Toast toast = new Toast(this);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
-        toast.show();
     }
 }
