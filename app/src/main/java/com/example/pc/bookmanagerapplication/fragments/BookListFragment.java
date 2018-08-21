@@ -104,7 +104,7 @@ public class BookListFragment extends Fragment {
 
         mAlreadyCreated = true;
         mAdapter = new CustomArrayAdapter(getContext(), R.layout.custom_list_view, mBooks);
-        mBookCollection.toAdapter(mBooks, mAdapter);
+        mBookCollection.collectionToAdapter(mBooks, mAdapter);
         mBookListView.setAdapter(mAdapter);
 
     }

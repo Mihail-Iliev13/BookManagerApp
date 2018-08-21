@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface Repository<T> {
 
-    void toAdapter(List<Book> bookList, CustomArrayAdapter adapter);
+    void collectionToAdapter(List<Book> bookList, CustomArrayAdapter adapter);
 
     void add (Book book);
 

@@ -45,7 +45,7 @@ public class BookRepository<T> implements Repository<T> {
 
 
     @Override
-    public void toAdapter (List<Book> bookList, CustomArrayAdapter adapter) {
+    public void collectionToAdapter(List<Book> bookList, CustomArrayAdapter adapter) {
 
             mFirebaseRepo.collection(mCollectionName)
                     .addSnapshotListener((queryDocumentSnapshots, e) -> {

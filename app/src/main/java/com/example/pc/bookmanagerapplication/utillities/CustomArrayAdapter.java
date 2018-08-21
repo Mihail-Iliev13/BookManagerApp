@@ -18,55 +18,68 @@ import java.util.List;
 
 public class CustomArrayAdapter extends ArrayAdapter{
 
-    private int layout;
+    private int mLayout;
 
     public CustomArrayAdapter(@NonNull Context context, int resource, @NonNull List objects) {
         super(context, resource, objects);
-        layout = resource;
+        mLayout = resource;
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         ViewHolder mainViewHolder;
+        Book book = (Book) getItem(position);
+
 
         if (convertView == null) {
 
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(layout, parent, false);
-            ViewHolder viewHolder = new ViewHolder();
-            viewHolder.bookCover = convertView.findViewById(R.id.iv_book_cover);
-            viewHolder.bookTitle = convertView.findViewById(R.id.tv_book_title);
+            convertView = inflater.inflate(mLayout, parent, false);
+            ViewHolder viewHolder = new ViewHolder(convertView);
 
-            Picasso.with(getContext()).load(((Book)getItem(position)).url)
-                    .resize(150, 300)
-                    .centerInside()
-                    .into(viewHolder.bookCover);
-
-            viewHolder.bookTitle.setText(((Book)getItem(position)).toString());
+            viewHolder.showBookCover(book);
+            viewHolder.showBookTitle(book);
 
             convertView.setTag(viewHolder);
 
         } else {
 
             mainViewHolder = (ViewHolder) convertView.getTag();
-
-            Picasso.with(getContext()).load(((Book)getItem(position)).getBookCoverUrl())
-                    .resize(150, 300)
-                    .centerInside()
-                    .into(mainViewHolder.bookCover);
-
-            mainViewHolder.bookTitle.setText(((Book)getItem(position)).toString());
-
+            mainViewHolder.showBookCover(book);
+            mainViewHolder.showBookTitle(book);
         }
 
         return convertView;
     }
 
-    public class ViewHolder {
 
-        ImageView bookCover;
-        TextView bookTitle;
+    private class ViewHolder {
+
+        private ImageView bookCover;
+        private TextView bookTitle;
+
+        private ViewHolder () {
+
+        }
+
+        private ViewHolder(View view) {
+            this.bookCover = view.findViewById(R.id.iv_book_cover);
+            this.bookTitle = view.findViewById(R.id.tv_book_title);
+
+        }
+
+        private void showBookCover (Book book) {
+
+            Picasso.with(getContext()).load(book.getBookCoverUrl())
+                    .resize(150, 300)
+                    .centerInside()
+                    .into(this.bookCover);
+        }
+
+        private void showBookTitle(Book book) {
+            this.bookTitle.setText(book.toString());
+        }
+
     }
-
 }
