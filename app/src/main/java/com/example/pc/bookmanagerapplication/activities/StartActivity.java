@@ -21,38 +21,22 @@ public class StartActivity extends AppCompatActivity implements GestureDetector.
 
         mCircle = findViewById(R.id.cwt_circle);
         mDetector = new GestureDetector(this, this);
-
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         mDetector.onTouchEvent(event);
-        boolean value =  super.onTouchEvent(event);
-
-        float touchX = event.getX();
-        float touchY = event.getY();
-
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
-                double deltaX = Math.pow(mCircle.getCircleX() - touchX, 2);
-                double deltaY = Math.pow(mCircle.getCircleY() - touchY, 2);
-
-                if (deltaX + deltaY < Math.pow(mCircle.getCircleRadius(), 2)) {
-
-                    Intent intent = new Intent(this, GetRecommendationsActivity.class);
-                    startActivity(intent);
-                    finish();
-                    return true;
-                }
-
-                return value;
-            }
-        return value;
+        return super.onTouchEvent(event);
     }
 
     @Override
     public boolean onDown(MotionEvent e) {
-        return false;
+
+        if (isCircleTouched(e, mCircle)) {
+            goToGetRecommendationsActivity();
+        }
+
+        return true;
     }
 
     @Override
@@ -91,6 +75,23 @@ public class StartActivity extends AppCompatActivity implements GestureDetector.
             }
         }
         return true;
+    }
+
+    private boolean isCircleTouched(MotionEvent event, CircleWithTextView circle) {
+
+        float touchX = event.getX();
+        float touchY = event.getY();
+        double deltaX = Math.pow(circle.getCircleX() - touchX, 2);
+        double deltaY = Math.pow(circle.getCircleY() - touchY, 2);
+
+        return deltaX + deltaY < Math.pow(circle.getCircleRadius(), 2);
+
+    }
+
+    private void goToGetRecommendationsActivity(){
+        Intent intent = new Intent(StartActivity.this, GetRecommendationsActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
 
